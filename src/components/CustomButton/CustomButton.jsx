@@ -51,7 +51,7 @@ class CustomButton extends Component {
       "btn-social btn-behance": behance,
       "btn-social btn-dribbble": dribbble,
       "btn-social btn-reddit": reddit,
-      "btn-social btn-stumbleupon": stumbleupon
+      "btn-social btn-stumbleupon": stumbleupon,
     });
 
     return <Button className={btnClasses} {...rest} />;
@@ -78,7 +78,7 @@ CustomButton.propTypes = {
   behance: PropTypes.bool,
   dribbble: PropTypes.bool,
   reddit: PropTypes.bool,
-  stumbleupon: PropTypes.bool
+  stumbleupon: PropTypes.bool,
 };
 
 export default CustomButton;
