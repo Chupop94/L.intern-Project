@@ -1,0 +1,59 @@
+.home {
+    width:100vw;
+
+    .middle-div {
+        position: relative;
+        margin-top:-30px;
+        text-align: center;
+        Button {
+            width:280px;
+            border-radius: 30px;
+            height:60px;
+            text-align: center;
+            background:royalblue;
+        }
+    }
+
+
+    .top-div {
+        height:370px;
+        background:burlywood;
+
+        .textBox {
+            padding-left:40px;
+            padding-top:40px;
+
+            .line-1 { //날짜 text
+                font-size:13px;
+                color:red;
+            }
+
+            .line-2 { //반려견 이름 text
+                font-size:20px;
+                color:blue;
+            }
+
+            .line-3 { //1일 입맛 상태 text
+                font-size:30px;
+                color:green;
+                border-bottom : 1px solid #000;
+            }
+        }
+
+        .imgBox {
+            padding-top:50px;
+            text-align:center;
+
+            img {
+                width:150px;
+                height:150px;
+            }
+        }
+    }
+
+    .bottom-div {
+        background:red;
+    }
+
+    
+}
