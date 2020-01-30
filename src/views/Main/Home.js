@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { List, ListItem, ListItemText, Avatar, ListItemAvatar} from "@material-ui/core";
 
 // css import
-import '../../assets/sass/main/home.scss';
+import '../../assets/sass/Main/home.scss';
 
 export default class Home extends PureComponent {
     constructor(props) {

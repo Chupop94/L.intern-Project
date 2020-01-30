@@ -1,10 +1,10 @@
 import React, { Component, PureComponent } from "react";
-
-import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
-
-import Card from "components/Card/Card.jsx";
-import Button from "components/CustomButton/CustomButton.jsx";
+import { FormGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import HttpConnect from "../../http/HttpConnect";
+import { Card, CardContent } from "@material-ui/core";
+
+//css
+import "../../assets/sass/Login/login.scss";
 
 //PureComponent : 컴포넌트 최적화
 export default class Login extends Component {
@@ -97,7 +97,7 @@ export default class Login extends Component {
   /*
    * 로그인 성공 시 펫 데이터를 가져오는 메서드
    */
-  getPetData = (memberNo) => {
+  getPetData = memberNo => {
     const http = new HttpConnect();
 
     http.url = "/pet/data";
@@ -144,7 +144,10 @@ export default class Login extends Component {
       : this.setState({ passwordErrorLogin: null });
 
     // 로그인
-    if (this.state.passwordErrorLogin === null && this.state.emailErrorLogin === null) {
+    if (
+      this.state.passwordErrorLogin === null &&
+      this.state.emailErrorLogin === null
+    ) {
       this.getLogin();
     }
   };
@@ -152,11 +155,10 @@ export default class Login extends Component {
   render() {
     return (
       <div className="scroll_fix">
-        <form className="test">
-          <Card
-            textCenter
-            title="Login"
-            content={
+        <form className="mt-40">
+          <Card>
+            <CardContent>
+              <h2 className="text-center">Login</h2>
               <div>
                 <FormGroup>
                   <FormLabel>
@@ -186,14 +188,13 @@ export default class Login extends Component {
                   <span className="star">*</span> 필수 입력
                 </div>
               </div>
-            }
-            ftTextCenter
-            legend={
-              <Button size="lg" onClick={this.handleLoginSubmit.bind(this)}>
-                로그인
-              </Button>
-            }
-          />
+              <div className="text-center">
+                <Button variant="info" size="lg" onClick={this.handleLoginSubmit.bind(this)}>
+                  로그인
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </form>
       </div>
     );
