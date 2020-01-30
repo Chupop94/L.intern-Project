@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "components/CustomButton/CustomButton.jsx";
+import { Button } from "react-bootstrap";
 
 export default class Footer extends Component {
   render() {
