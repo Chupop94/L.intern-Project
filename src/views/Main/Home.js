@@ -6,22 +6,28 @@ import { List, ListItem, ListItemText, Avatar, ListItemAvatar} from "@material-u
 // css import
 import '../../assets/sass/main/home.scss';
 
-export default class Home extends PureComponent {
-    constructor(props) {
-        super(props);
-        
-        //로그인이 되지 않으면 자동 리다이렉트
-        new Redirect().CheckRedirect();
+export default class Home extends Component {
+  render() {
+    return (
+      <div>
+        <Card body inverse style={{ backgroundColor: "#333", borderColor: "#333" }}>
+          <CardBody>
+            <CardTitle>
+              <h5>1월 29일</h5>
+            </CardTitle>
+            <CardSubtitle>
+              <h4>정봉이는 지금,</h4>
+            </CardSubtitle>
+            <CardSubtitle>
+              <Link href="#" marginRight={12}>
+                <Text size={900}>소고기 킬러 ></Text>
+              </Link>
+            </CardSubtitle>
+          </CardBody>
 
-        //날짜 및 유저 정보 설정
-        const date = new Date();
-        this.state = {
-            member : JSON.parse(window.sessionStorage.getItem('member')),
-            pet : JSON.parse(window.sessionStorage.getItem('pet')),
-            month : date.getMonth() + 1,
-            day : date.getDate()
-        }
-    }
+          <Card body>
+            <img width="100%" src={avatar} alt="Card image cap" />
+          </Card>
 
     render() {
         return (
@@ -61,3 +67,4 @@ export default class Home extends PureComponent {
         )
     }
 }
+//<th scope="row">1</th>자리에 이것을 넣으면 이미지 가능 : <UserCard avatar={avatar} name="" userName="" />
