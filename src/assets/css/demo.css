@@ -87,6 +87,10 @@
   align-items: center;
 }
 
+.div-tab-block {
+  height:60px;
+}
+
 .test {
   margin-top: 40%;
 }

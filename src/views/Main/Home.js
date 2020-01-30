@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react'
 import Redirect from '../../security/Redirect';
 import { Button } from "react-bootstrap";
-import { List, ListItem, ListItemText, ListItemIcon} from "@material-ui/core"
+import { List, ListItem, ListItemText, Avatar, ListItemAvatar} from "@material-ui/core";
 
 // css import
 import '../../assets/sass/main/home.scss';
-import petImg from '../../assets/img/shiba.jpg';
 
 export default class Home extends PureComponent {
     constructor(props) {
@@ -31,10 +30,10 @@ export default class Home extends PureComponent {
                     <div className="textBox">
                         <span className="line-1">{this.state.month}월 {this.state.day}일</span><br/>
                         <span className="line-2">{this.state.pet.name}는 지금,</span><br/>
-                        <span className="line-3"> 소고기 킬러 ></span>
+                        <span className="line-3"><b> 소고기 킬러</b> > </span>
                     </div>
                     <div className="imgBox">
-                        <img src={petImg} alt="illust Box"/>
+                        <img className="center" src="/main/shiba.jpg" alt="illust Box"/>
                     </div>
                 </div>
                 <div className="middle-div">
@@ -42,13 +41,17 @@ export default class Home extends PureComponent {
                 </div>
                 
                 <div className="bottom-div">
-                    <List>
-                        {[0, 1, 2, 3].map(value => {
+                    <List className="list">
+                        {[0, 1, 2, 3, 4, 5, 6].map(value => {
                             return (
-                               <ListItem>
-                                   <ListItemIcon></ListItemIcon>
-                                   <ListItemText>hello</ListItemText>
-                                   <ListItemIcon></ListItemIcon>
+                               <ListItem className="item" key={value} button>
+                                   <ListItemAvatar>
+                                        <Avatar src="/main/fodderex.png"></Avatar>
+                                   </ListItemAvatar>
+                                   <ListItemText className="text">hello</ListItemText>
+                                   <ListItemAvatar className="secondIcon">
+                                        <Avatar src="/main/smile.png"></Avatar>
+                                   </ListItemAvatar>
                                </ListItem>
                             )
                         })}

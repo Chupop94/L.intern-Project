@@ -13,8 +13,7 @@
             background:royalblue;
         }
     }
-
-
+    
     .top-div {
         height:370px;
         background:burlywood;
@@ -42,8 +41,8 @@
 
         .imgBox {
             padding-top:50px;
-            text-align:center;
-
+            display:flex;
+            justify-content: center;
             img {
                 width:150px;
                 height:150px;
@@ -52,8 +51,24 @@
     }
 
     .bottom-div {
-        background:red;
-    }
+        .list {
+            .item {
+                left:50vw;
+                width:300px;
+                margin-left:-150px;
+                background:pink;
+                margin-top:15px;
+                height:80px;
+                border-radius: 10px;
+            }
 
-    
+            .secondIcon {
+                padding-left:20px;
+            }
+
+            .text {
+                //text-align:center;
+            }
+        }
+    }
 }

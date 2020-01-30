@@ -11,8 +11,9 @@ function App() {
       <Route path="/Home" component={Home}/>
       <Route path="/UserPage" component={UserPage}/>
       {
-        (window.sessionStorage.getItem('member') != null)
-        ? <Footer></Footer>
+      (window.sessionStorage.getItem('member') != null)
+        ? 
+        <div className="div-tab-block"></div>
         : null
       }
     </div>
