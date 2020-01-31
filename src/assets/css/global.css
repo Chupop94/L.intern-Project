@@ -17,7 +17,7 @@
 }
 
 .div-tab-block {
-  height:60px;
+  height: 60px;
 }
 
 .scroll_fix {
@@ -26,4 +26,8 @@
   min-height: 100vh;
   overflow: hidden !important;
   touch-action: none;
+}
+
+.test {
+  width: 100vw;
 }
