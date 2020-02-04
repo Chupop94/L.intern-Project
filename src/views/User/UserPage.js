@@ -1,21 +1,24 @@
 import React from "react";
-import { makeStyles, Card, CardContent, AppBar, Toolbar, Typography, Button, IconButton, Avatar, MenuItem, Badge } from "@material-ui/core";
+import { makeStyles, Divider, AppBar, Toolbar, Typography, Button, IconButton, Avatar, MenuItem, MenuList, Paper } from "@material-ui/core";
+
 import Tag from "../../tag/Tag.js";
+//Relative imports outside of src/ are not supported.
+//import avatar from "../../../public/main/shiba.jpg";
 
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
   },
-  title: {
+  grow: {
     flexGrow: 1,
   },
   menuButton: {
@@ -35,50 +38,83 @@ const useStyles = makeStyles(theme => ({
   pos: {
     marginBottom: 12,
   },
+  paper: {
+    marginRight: theme.spacing(2),
+  },
+  large: {
+    position: "relative",
+    width: theme.spacing(15),
+    height: theme.spacing(15),
+    //marginLeft: -theme.spacing(12.5),
+    border: "5px solid #E8E8E8",
+  },
 }));
 
 const UserPage = () => {
   return (
     <div>
-      <div className={useStyles.root}>
+      <div className={useStyles().grow}>
         <AppBar position="static">
           <Toolbar variant="dense">
-            <IconButton edge="start" className={useStyles.menuButton} color="inherit" aria-label="menu">
+            <IconButton edge="start" className={useStyles().menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" className={useStyles.title}>
+            <Typography variant="h6" color="inherit">
               UserPage
             </Typography>
-            <div class="button_flex">
-              <IconButton aria-label="show 11 new notifications" color="inherit">
-                <Badge badgeContent={11} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+            <div class="flex justify-end">
+              <Button simple>
+                <FacebookIcon fontSize="small" color="action" />
+              </Button>
+              <Button simple>
+                <InstagramIcon fontSize="small" color="action" />
+              </Button>
+              <Button simple>
+                <TwitterIcon fontSize="small" color="action" />
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
       </div>
 
-      <div className={(styles.main, styles.mainRaised)}>
-        <Avatar class="p-10" alt="..." src="main/shiba.jpg"></Avatar>
+      <div class="flex justify-center">
+        <Avatar src="main/shiba.jpg" alt="..." className={useStyles().large} />
+      </div>
+      <div class="text-center">
+        <h4 className="title">
+          Name
+          <br />
+          <small>추가부분</small>
+        </h4>
+        <Divider />
+        <br />
+        <Tag></Tag>
+        <Divider />
       </div>
 
-      <Card className={useStyles.card}>
-        <div class="text-center text-5xl" className={useStyles.cardtitle}>
-          <b>댕댕이</b>
-        </div>
-        <CardContent>
-          <div class="border border-solid boder-black">
-            <Tag></Tag>
-          </div>
-          <div class="flex justify-around">
-            <FacebookIcon fontSize="large" color="action" />
-            <InstagramIcon fontSize="large" color="action" />
-            <TwitterIcon fontSize="large" color="action" />
-          </div>
-        </CardContent>
-      </Card>
+      <div>
+        <Paper>
+          <MenuList>
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+            <Divider />
+            <MenuItem>example</MenuItem>
+          </MenuList>
+        </Paper>
+      </div>
     </div>
   );
 };

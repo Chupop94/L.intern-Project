@@ -32,7 +32,6 @@ export default class Login extends Component {
   };
 
   // Kakao Login
-  // Google Login
   responseKakao = res => {
     this.setState({
       id: res.profile.id,
@@ -41,7 +40,7 @@ export default class Login extends Component {
     });
   };
 
-  // L
+  // login errer
   responseFail = err => {
     console.error(err);
   };
@@ -232,7 +231,7 @@ export default class Login extends Component {
 
 const KakaoButton = styled(KakaoLoginProps)`
   padding 0;
-  width: 190px;
+  width: 110px;
   height: 44px;
   line-height:44px;
   color: #783c00;

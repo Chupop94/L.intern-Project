@@ -29,9 +29,9 @@ export default class Tag extends React.Component {
         { id: "말고기", text: "말고기" },
       ],
     };
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
+    //this.handleDelete = this.handleDelete.bind(this);
+    //this.handleAddition = this.handleAddition.bind(this);
+    //this.handleDrag = this.handleDrag.bind(this);
   }
 
   handleDelete(i) {
@@ -63,10 +63,10 @@ export default class Tag extends React.Component {
         <ReactTags
           tags={tags}
           suggestions={suggestions}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          handleDrag={this.handleDrag}
-          delimiters={delimiters}
+          //handleDelete={this.handleDelete}
+          //handleAddition={this.handleAddition}
+          //handleDrag={this.handleDrag}
+          //delimiters={delimiters}
         />
       </div>
     );
