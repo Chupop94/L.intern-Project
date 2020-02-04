@@ -37,11 +37,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-search": "^2.1.1",
-<<<<<<< Updated upstream
     "react-select": "^3.0.8",
-=======
-    "react-simply-carousel": "^2.1.6",
->>>>>>> Stashed changes
     "react-tag-input": "^6.4.2",
     "reactstrap": "^8.4.1",
     "styled-components": "^5.0.0",
