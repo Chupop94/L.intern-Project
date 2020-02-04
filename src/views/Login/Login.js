@@ -212,6 +212,15 @@ export default class Login extends PureComponent {
                     />
                   </div>
                 </div>
+                <div class="flex-1 flex-center">
+                  <KakaoButton
+                    jsKey={process.env.React_APP_Kakao}
+                    buttonText="Kakao"
+                    onSuccess={this.responseKakao}
+                    onFailure={this.responseFail}
+                    getProfile="true"
+                  />
+                </div>
               </div>
               <div className="text-center">
                 <Button variant="info" size="lg" onClick={this.handleLoginSubmit.bind(this)}>

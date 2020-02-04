@@ -1,17 +1,27 @@
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
+import { Button } from "@material-ui/core";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 class SearchCarousel extends React.Component {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   state = {
-    galleryItems: this.items.map(i => <h5 key={i}>#연관검색어{i}</h5>),
+    galleryItems: this.items.map(i => (
+      <Button variant="outlined" color="primary" size="small" key={i}>
+        #검색어{i}
+      </Button>
+    )),
   };
 
   responsive = {
-    0: { items: 1 },
-    1024: { items: 2 },
+    0: { items: 4 },
+    1024: { items: 10 },
+  };
+
+  stagePadding = {
+    paddingLeft: 10, // in pixels
+    paddingRight: 10,
   };
 
   onSlideChange(e) {
@@ -28,16 +38,17 @@ class SearchCarousel extends React.Component {
     return (
       <AliceCarousel
         items={this.state.galleryItems}
+        infinite={true}
         responsive={this.responsive}
-        autoPlayInterval={2000}
-        autoPlayDirection="rtl"
-        autoPlay={false}
-        fadeOutAnimation={true}
+        dotsDisabled={true}
+        buttonsDisabled={true}
+        fadeOutAnimation={false}
         mouseTrackingEnabled={true}
         playButtonEnabled={false}
-        disableAutoPlayOnAction={true}
         onSlideChange={this.onSlideChange}
         onSlideChanged={this.onSlideChanged}
+        isPrevSlideDisabled
+        isNextSlideDisabled
       />
     );
   }

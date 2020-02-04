@@ -11,7 +11,7 @@ import {
   fade
 } from "@material-ui/core";
 
-//import SearchCarousel from "../../Carousel/Carousel.js";
+import Carousel from "../../Carousel/Carousel.js";
 // 자동으로 옆으로 넘어가는 스크롤 => 실시간 검색어 순위 상태bar 같은 것
 
 import SearchIcon from "@material-ui/icons/Search";
