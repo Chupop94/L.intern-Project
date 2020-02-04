@@ -3,6 +3,8 @@ import AliceCarousel from "react-alice-carousel";
 import { Button } from "@material-ui/core";
 import "react-alice-carousel/lib/alice-carousel.css";
 
+//머지는 머지 merge는 뭐즤?
+
 class SearchCarousel extends React.Component {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

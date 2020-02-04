@@ -112,7 +112,7 @@ const SearchPage = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <div class="flex justify-around">
+      <div className="flex justify-around">
         <Carousel></Carousel>
       </div>
       <div>
