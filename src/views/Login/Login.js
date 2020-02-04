@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { FormGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import HttpConnect from "../../http/HttpConnect";
-import { Card, CardContent, Container } from "@material-ui/core";
+import { Card, CardContent} from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
 import KakaoLoginProps from "react-kakao-login";
 
@@ -158,9 +158,6 @@ export default class Login extends PureComponent {
           passwordErrorLogin: <small className="text-danger">비밀번호는 최소 6자리 이상 입력해야 합니다.</small>,
         })
       : this.setState({ passwordErrorLogin: null });
-  };
-  /*
-    // 로그인
     if (
       this.state.passwordErrorLogin === null &&
       this.state.emailErrorLogin === null
@@ -168,13 +165,14 @@ export default class Login extends PureComponent {
       this.getLogin();
     }
   };
-*/
+
   render() {
     return (
       <div className="scroll_fix">
         <form className="mt-40">
           <Card>
             <CardContent>
+            <div>
             <h2 className="text-center">Login</h2>
                 <FormGroup>
                   <FormLabel>
@@ -194,8 +192,8 @@ export default class Login extends PureComponent {
                   <span className="star">*</span> 필수 입력
                 </div>
 
-                <div class="flex items-start">
-                  <div class="flex-1 text-center">
+                <div className="flex items-start">
+                  <div className="flex-1 text-center">
                     {" "}
                     <GoogleLogin
                       clientId={process.env.React_APP_Google}
@@ -204,7 +202,7 @@ export default class Login extends PureComponent {
                       onFailure={this.responseFail}
                     />
                   </div>
-                  <div class="flex-1 flex-center">
+                  <div className="flex-1 flex-center">
                     <KakaoButton
                       jsKey={process.env.React_APP_Kakao}
                       buttonText="Kakao"

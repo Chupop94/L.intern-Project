@@ -5,7 +5,6 @@ import Tag from "../../tag/Tag.js";
 //Relative imports outside of src/ are not supported.
 //import avatar from "../../../public/main/shiba.jpg";
 
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -51,6 +50,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserPage = () => {
+  const handleLogout = () => {
+    window.sessionStorage.clear();
+    window.location.href = "/";
+  };
   return (
     <div>
       <div className={useStyles().grow}>
@@ -62,14 +65,14 @@ const UserPage = () => {
             <Typography variant="h6" color="inherit">
               UserPage
             </Typography>
-            <div class="flex justify-end">
-              <Button simple>
+            <div className="flex justify-end">
+              <Button simple="true">
                 <FacebookIcon fontSize="small" color="action" />
               </Button>
-              <Button simple>
+              <Button simple="true">
                 <InstagramIcon fontSize="small" color="action" />
               </Button>
-              <Button simple>
+              <Button simple="true">
                 <TwitterIcon fontSize="small" color="action" />
               </Button>
             </div>
@@ -77,10 +80,10 @@ const UserPage = () => {
         </AppBar>
       </div>
 
-      <div class="flex justify-center">
+      <div className="flex justify-center">
         <Avatar src="main/shiba.jpg" alt="..." className={useStyles().large} />
       </div>
-      <div class="text-center">
+      <div className="text-center">
         <h4 className="title">
           Name
           <br />
@@ -111,7 +114,7 @@ const UserPage = () => {
             <Divider />
             <MenuItem>example</MenuItem>
             <Divider />
-            <MenuItem>example</MenuItem>
+            <MenuItem onClick={e=> handleLogout()}>로그아웃</MenuItem>
           </MenuList>
         </Paper>
       </div>

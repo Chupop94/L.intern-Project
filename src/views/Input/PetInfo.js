@@ -1,14 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
   Avatar,
-  makeStyles,
-  Grid,
-  Typography,
-  InputLabel,
-  Select
+  makeStyles
 } from "@material-ui/core";
+import Select from "react-select";
 import { MdPhoto } from "react-icons/md";
 import DatePicker from "react-date-picker";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
@@ -34,6 +31,7 @@ const PetInfo = () => {
   const [weight, setWeight] = useState("");
   const [adopt_date, setAdoptDate] = useState(new Date());
   const [characteristic, setCharacteristic] = useState("");
+  const [species_no, setSpeciesNo] = useState({value:'', label:''});
 
   /*
    * 이미지 미리보기, 저장
@@ -59,7 +57,7 @@ const PetInfo = () => {
     });
   };
 
-  const onDropFile = useCallback(e => {
+  const onDropFile = e => {
     const f = e.target.files[0];
     console.log(f);
 
@@ -79,7 +77,7 @@ const PetInfo = () => {
       setPictures(pic.dataURL);
       console.log(pic);
     });
-  }, []);
+  };
 
   const hasExtension = fileName => {
     const pattern = "(" + imgExtension.join("|").replace(/\./g, "\\.") + ")$";
@@ -125,6 +123,12 @@ const PetInfo = () => {
     setAdoptDate(date);
   };
 
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+
   //반려견 몸무게 정보 변경
   const onChangePetWeight = e => {
     var regexp = /^[0-9/.]*$/;
@@ -140,6 +144,11 @@ const PetInfo = () => {
     }
 
     setWeight(e.target.value);
+  };
+
+  const onChangePetSpecies = selectedOption => {
+    setSpeciesNo({selectedOption});
+    console.log(`Option selected:`, selectedOption);
   };
 
   return (
@@ -173,21 +182,16 @@ const PetInfo = () => {
       <FormGroup>
           <FormLabel>반려견 종(Species) <span className="star">*</span></FormLabel>
             <Select
-              native
-              //value={age}
-              //onChange={}
+              value={species_no.value}
+              onChange={onChangePetSpecies}
+              options={options}
               // labelWidth="30"
               // inputProps={{
               //   name: "age",
               //   id: "outlined-age-native-simple"
               // }
               //}
-            >
-              <option value="" />
-              <option value={10}>Ten</option>
-              <option value={20}>Twenty</option>
-              <option value={30}>Thirty</option>
-            </Select>
+              />
         </FormGroup>
         <FormGroup>
           <FormLabel>

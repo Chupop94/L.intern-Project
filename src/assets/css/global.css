@@ -6,6 +6,7 @@
   width: 100%;
   background: grey;
   color: white;
+  z-index:100;
 }
 
 .button_flex {

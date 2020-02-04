@@ -3,7 +3,8 @@ import Login from './views/Login/Login';
 import { Route } from 'react-router-dom';
 import {Home} from './views/Main';
 import PetInfo from './views/Input/PetInfo';
-import SelectTodayList from './views/Menu/Tests';
+import SearchPage from './views/Search/SearchPage';
+import UserPage from './views/User/UserPage';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Route exact path="/" component={Login}/>
       <Route path="/Home" component={Home}/>
       <Route path="/petInfo" component={PetInfo}/>
-      <Route path="/stl" component={SelectTodayList}/>
+      <Route path="/SearchPage" component={SearchPage} />
+      <Route path="/UserPage" component={UserPage} />
       {
       (window.sessionStorage.getItem('member') != null)
         ? 
