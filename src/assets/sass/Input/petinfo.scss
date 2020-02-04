@@ -1,0 +1,22 @@
+$photo-icon-width:50px;
+$photo-icon-height:50px;
+
+.profile-photo-div {
+    position: relative;
+    left:50%;
+}
+
+.photo-icon {
+    position: relative;
+    width:$photo-icon-width;
+    height:$photo-icon-height;
+    color:#B0B0B0;
+    margin-left:$photo-icon-width;
+    margin-top:-50px;
+    z-index:2;
+}
+
+.date-picker {
+    position:relative;
+    z-index:3;
+}

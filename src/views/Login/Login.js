@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { FormGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import HttpConnect from "../../http/HttpConnect";
 import { Card, CardContent, Container } from "@material-ui/core";
@@ -10,7 +10,7 @@ import styled from "styled-components";
 import "../../assets/sass/Login/login.scss";
 
 //PureComponent : 컴포넌트 최적화
-export default class Login extends Component {
+export default class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -175,8 +175,7 @@ export default class Login extends Component {
         <form className="mt-40">
           <Card>
             <CardContent>
-              <h2 className="text-center">Login</h2>
-              <div>
+            <h2 className="text-center">Login</h2>
                 <FormGroup>
                   <FormLabel>
                     이메일 주소: <span className="star">*</span>

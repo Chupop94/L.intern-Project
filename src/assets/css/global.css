@@ -20,6 +20,18 @@
   height: 60px;
 }
 
+.menu-item-li {
+  position: relative;
+  left:50%;
+}
+
+.menu-item {
+  text-align: center;
+  width:25%;
+  padding-top:30px;
+  /* border : 1px solid black; */
+}
+
 .scroll_fix {
   background-color: black;
   height: 100vh;
@@ -28,6 +40,6 @@
   touch-action: none;
 }
 
-.test {
-  width: 100vw;
+.fab:focus {
+    outline:none !important;
 }
