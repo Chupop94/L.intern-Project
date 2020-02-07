@@ -130,8 +130,9 @@ export default class Login extends PureComponent {
       // return 된 데이터가 '' (null)일 경우 펫 정보가 없는 것으로 판정.
       // (1)'처음 로그인' 또는 (2)'펫 정보를 입력하지 않았을 경우' 이동.
 
+      // 처음의 경우 펫 정보를 입력하는 화면으로 이동
       if (data === "") {
-        // 펫 입력하는 화면으로 이동하는 부분 (추후 추가)
+        window.location.href="/PetInfo";
       } else {
         // 펫 정보를 sessionStorage(로컬)에 저장
         window.sessionStorage.setItem(`pet`, JSON.stringify(data));
@@ -178,14 +179,14 @@ export default class Login extends PureComponent {
                   <FormLabel>
                     이메일 주소: <span className="star">*</span>
                   </FormLabel>
-                  <FormControl type="text" name="email" onChange={event => this.handleLoginEmail(event)} />
+                  <FormControl type="text" value={this.state.emailLogin} name="email" onChange={event => this.handleLoginEmail(event)} />
                   {this.state.emailErrorLogin}
                 </FormGroup>
                 <FormGroup>
                   <FormLabel>
                     비밀번호: <span className="star">*</span>
                   </FormLabel>
-                  <FormControl type="password" name="password" onChange={event => this.handleLoginPassword(event)} />
+                  <FormControl type="password" value={this.state.passwordLogin} name="password" onChange={event => this.handleLoginPassword(event)} />
                   {this.state.passwordErrorLogin}
                 </FormGroup>
                 <div className="category">
@@ -211,15 +212,6 @@ export default class Login extends PureComponent {
                       getProfile="true"
                     />
                   </div>
-                </div>
-                <div class="flex-1 flex-center">
-                  <KakaoButton
-                    jsKey={process.env.React_APP_Kakao}
-                    buttonText="Kakao"
-                    onSuccess={this.responseKakao}
-                    onFailure={this.responseFail}
-                    getProfile="true"
-                  />
                 </div>
               </div>
               <div className="text-center">

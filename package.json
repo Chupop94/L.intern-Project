@@ -14,6 +14,7 @@
     "@yaireo/tagify": "^3.2.6",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "browser-image-compression": "^1.0.6",
     "classnames": "^2.2.6",
     "cross-env": "^6.0.3",
     "date-fns": "^2.9.0",

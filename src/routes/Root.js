@@ -8,7 +8,7 @@ const Root = () => {
         <BrowserRouter>
             <App/>
             {
-        (window.sessionStorage.getItem('member') != null)
+        (window.sessionStorage.getItem('pet') != null)
         ? 
         <Footer></Footer>
         : null

@@ -52,10 +52,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserPage = () => {
+  const pet = JSON.parse(window.sessionStorage.getItem(`pet`));
+
   const handleLogout = () => {
     window.sessionStorage.clear();
     window.location.href = "/";
   };
+
 
   return (
     <div>
@@ -84,7 +87,7 @@ const UserPage = () => {
       </div>
 
       <div className="flex justify-center">
-        <Avatar src="main/shiba.jpg" alt="..." className={useStyles().large} />
+        <Avatar src={pet.petImg} alt="..." className={useStyles().large} />
       </div>
       <div className="text-center">
         <h4 className="title">

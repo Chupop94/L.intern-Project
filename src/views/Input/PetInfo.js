@@ -9,9 +9,16 @@ import Select from "react-select";
 import { MdPhoto } from "react-icons/md";
 import DatePicker from "react-date-picker";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
+import { format } from 'date-fns';
+import imageCompression from 'browser-image-compression';
 
 // css
 import "../../assets/sass/Input/petinfo.scss";
+
+// data
+
+import { options } from "../../data/PetSpecices";
+import HttpConnect from "../../http/HttpConnect";
 
 const useStyles = makeStyles(theme => ({
   large: {
@@ -25,13 +32,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PetInfo = () => {
-  const [pictures, setPictures] = useState("/main/shiba.jpg");
+  const [pictures, setPictures] = useState('');
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [adopt_date, setAdoptDate] = useState(new Date());
   const [characteristic, setCharacteristic] = useState("");
   const [species_no, setSpeciesNo] = useState({value:'', label:''});
+  const memberNo = JSON.parse(window.sessionStorage.getItem('member')).memberNo;
 
   /*
    * 이미지 미리보기, 저장
@@ -46,11 +54,11 @@ const PetInfo = () => {
       const reader = new FileReader();
 
       // Read the image via FileReader API and save image result in state.
-      reader.onload = function(e) {
+      reader.onload = e => {
         // Add the file name to the data URL
         let dataURL = e.target.result;
         dataURL = dataURL.replace(";base64", `;name=${file.name};base64`);
-        resolve({ file, dataURL });
+        resolve({ file, dataURL});
       };
 
       reader.readAsDataURL(file);
@@ -73,9 +81,25 @@ const PetInfo = () => {
       return;
     }
 
-    readFile(f).then(pic => {
-      setPictures(pic.dataURL);
-      console.log(pic);
+    console.log(`originalFile size ${f.size / 1024 / 1024} MB`);
+
+    var options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 256,
+      useWebWorker: true
+    }
+
+    imageCompression(f, options)
+      .then(function (compressedFile) {
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+   
+        readFile(compressedFile).then(pic => {
+          setPictures(pic.dataURL);
+          console.log(pic);
+        });
+      })
+      .catch(function (error) {
+        console.log(error.message);
     });
   };
 
@@ -123,11 +147,51 @@ const PetInfo = () => {
     setAdoptDate(date);
   };
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
+  //필수입력 값이 채워져있는지 확인. (없으면 0, 모두 있으면 1)
+  const onCheckForm = () => {
+    if(pictures === '' || name === '' || age === '' || weight === '' || species_no.selectedOption.value === undefined) {
+      return 0;
+    }
+    return 1;
+  };
+
+  // 데이터 전송
+  const submitPetData = (e) => {
+    const checkform = onCheckForm();
+
+    if(checkform === 0) {
+      alert("필수 입력칸을 채워주세요!");
+      return;
+    }
+
+    const http = new HttpConnect();
+    http.url = "/pet/insert";
+    http.data = JSON.stringify({
+      memberNo : memberNo,
+      name : name,
+      age : age,
+      speciesNo : species_no.selectedOption.value,
+      adoptDate : format(adopt_date, "yyyy-MM-dd HH:mm:ss"),
+      weight : weight,
+      characteristic : characteristic,
+      petImg : pictures
+    });
+
+    console.log(http.data);
+
+    http.getCallData().then(data => {
+      console.log(data);
+
+      if (data === 1 ){
+        alert("정보입력에 성공했습니다. !");
+        // 펫 정보를 sessionStorage(로컬)에 저장
+        getPetData();
+        window.location.href='/Home';
+      } else {
+        alert("정보입력에 실패했습니다. !");
+      }
+    });
+  }
 
   //반려견 몸무게 정보 변경
   const onChangePetWeight = e => {
@@ -150,6 +214,28 @@ const PetInfo = () => {
     setSpeciesNo({selectedOption});
     console.log(`Option selected:`, selectedOption);
   };
+
+  const getPetData = () => {
+    const http = new HttpConnect();
+    http.url = "/pet/data";
+    http.data = memberNo;
+
+    http.getCallData().then(data => {
+      console.log(data);
+
+      //펫 정보가 없는 경우 = 서버에러
+      if (data === "") {
+        alert("서버에 에러가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
+        window.sessionStorage.clear();
+        window.location.href="/";
+      } else {
+        // 펫 정보를 sessionStorage(로컬)에 저장
+        window.sessionStorage.setItem(`pet`, JSON.stringify(data));
+        // 홈 화면으로 이동
+        window.location.href = "/Home";
+      }
+    });
+};
 
   return (
     <Card>
@@ -179,20 +265,6 @@ const PetInfo = () => {
       </div>
       <p />
       <CardContent>
-      <FormGroup>
-          <FormLabel>반려견 종(Species) <span className="star">*</span></FormLabel>
-            <Select
-              value={species_no.value}
-              onChange={onChangePetSpecies}
-              options={options}
-              // labelWidth="30"
-              // inputProps={{
-              //   name: "age",
-              //   id: "outlined-age-native-simple"
-              // }
-              //}
-              />
-        </FormGroup>
         <FormGroup>
           <FormLabel>
             반려견 이름 <span className="star">*</span>
@@ -205,6 +277,25 @@ const PetInfo = () => {
           />
         </FormGroup>
         <FormGroup>
+          <FormLabel>입양 날짜</FormLabel>
+          <br />
+          <DatePicker
+            value={adopt_date}
+            name="adopt_date"
+            onChange={e => onChangePetDate(e)}
+            className="date-picker"
+          />
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>반려견 종(Species) <span className="star">*</span></FormLabel>
+            <Select
+              className="position-relative z-50"
+              value={species_no.value}
+              onChange={onChangePetSpecies}
+              options={options}
+              />
+        </FormGroup>
+        <FormGroup>
           <FormLabel>
             반려견 나이 <span className="star">*</span>
           </FormLabel>
@@ -213,16 +304,6 @@ const PetInfo = () => {
             name="age"
             value={age}
             onChange={e => onChangePetAge(e)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel>입양 날짜</FormLabel>
-          <br />
-          <DatePicker
-            value={adopt_date}
-            name="adopt_date"
-            onChange={e => onChangePetDate(e)}
-            className="date-picker"
           />
         </FormGroup>
         <FormGroup>
@@ -245,6 +326,9 @@ const PetInfo = () => {
             maxLength="45"
             onChange={e => onChangePetChar(e)}
           />
+        </FormGroup>
+        <FormGroup className="text-center pt-10">
+          <button className="button button1" onClick={e => submitPetData(e)}>입력완료</button>
         </FormGroup>
       </CardContent>
     </Card>

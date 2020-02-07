@@ -5,37 +5,36 @@
         position: relative;
         margin-top:-30px;
         text-align: center;
-        Button {
-            width:280px;
-            border-radius: 30px;
+        img {
+            width:165px;
             height:60px;
-            text-align: center;
-            background:royalblue;
         }
     }
     
     .top-div {
         height:370px;
-        background:burlywood;
+        background:rgb(255, 181, 63);
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
 
         .textBox {
             padding-left:40px;
             padding-top:40px;
+            color:white;
 
             .line-1 { //날짜 text
+                font-weight:lighter;
                 font-size:13px;
-                color:red;
             }
 
             .line-2 { //반려견 이름 text
                 font-size:20px;
-                color:blue;
+                font-weight: 500;
             }
 
             .line-3 { //1일 입맛 상태 text
                 font-size:30px;
-                color:green;
-                border-bottom : 1px solid #000;
+                border-bottom : 1px solid white;
             }
         }
 
@@ -44,8 +43,8 @@
             display:flex;
             justify-content: center;
             img {
-                width:150px;
-                height:150px;
+                width:100px;
+                height:145px;
             }
         }
     }

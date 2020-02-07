@@ -38,16 +38,16 @@ const useStyle = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   iconflex: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(3)
   },
   photoButton: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(2)
   },
   title: {
     flexGrow: 1,
@@ -61,14 +61,14 @@ const useStyle = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "auto",
-    },
+      width: "auto"
+    }
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -77,13 +77,13 @@ const useStyle = makeStyles(theme => ({
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
   inputRoot: {
-    color: "inherit",
+    color: "inherit"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -92,10 +92,10 @@ const useStyle = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: 120,
       "&:focus": {
-        width: 200,
-      },
-    },
-  },
+        width: 200
+      }
+    }
+  }
 }));
 
 function generate(element) {
@@ -107,6 +107,9 @@ function generate(element) {
 }
 
 const SearchPage = () => {
+  const pet = JSON.parse(window.sessionStorage.getItem("pet"));
+  console.log(pet.name);
+
   const onBackButton = () => {
     window.history.back();
   };
@@ -176,6 +179,7 @@ const SearchPage = () => {
           </Grid>
         </Grid>
       </div>
+      <button className="select-button">새로 담기</button>
     </div>
   );
 };
