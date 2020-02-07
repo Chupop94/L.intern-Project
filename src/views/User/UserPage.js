@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { makeStyles, Divider, AppBar, Toolbar, Typography, Button, IconButton, Avatar, MenuItem, MenuList, Paper } from "@material-ui/core";
+
+//import Popup from "reactjs-popup";
 
 import Tag from "../../tag/Tag.js";
 //Relative imports outside of src/ are not supported.
@@ -54,6 +56,7 @@ const UserPage = () => {
     window.sessionStorage.clear();
     window.location.href = "/";
   };
+
   return (
     <div>
       <div className={useStyles().grow}>
@@ -114,7 +117,7 @@ const UserPage = () => {
             <Divider />
             <MenuItem>example</MenuItem>
             <Divider />
-            <MenuItem onClick={e=> handleLogout()}>로그아웃</MenuItem>
+            <MenuItem onClick={e => handleLogout()}>로그아웃</MenuItem>
           </MenuList>
         </Paper>
       </div>
