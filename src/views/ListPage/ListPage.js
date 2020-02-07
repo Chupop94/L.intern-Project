@@ -1,41 +1,33 @@
 // 홈_입력_검색tab을 눌렀을 때, 밑에서 키보드가 나오는 상황
 import React from "react";
-import {
-  makeStyles,
-  AppBar,
-  InputBase,
-  Toolbar,
-  Typography,
-  IconButton,
-  fade,
-  Grid,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  List,
-  ListItemSecondaryAction,
-  Button,
-} from "@material-ui/core";
+import { makeStyles, AppBar, InputBase, Toolbar, Typography, IconButton, fade, Button } from "@material-ui/core";
 
 import Carousel from "../../Carousel/Carousel";
 // 자동으로 옆으로 넘어가는 스크롤 => 실시간 검색어 순위 상태bar 같은 것
 
 import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import SelectTodayList from "../Menu/SelectTodayList";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import Popup from "../../Popup/Popup";
 
 //import SearchData from "./SearchData.js";
+const images = [
+  {
+    url: "main/smile.png",
+    title: "",
+    width: "40%",
+  },
+];
 
 const useStyle = makeStyles(theme => ({
   root: {
-    width: "w-screen",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
   },
   grow: {
     flexGrow: 1,
@@ -47,14 +39,13 @@ const useStyle = makeStyles(theme => ({
     marginLeft: theme.spacing(3),
   },
   photoButton: {
+    position: "relative",
+    border: "1px",
     marginLeft: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(6),
-  },
-  titleItem: {
-    margin: theme.spacing(4, 0, 2),
+    marginLeft: theme.spacing(11),
   },
   search: {
     position: "relative",
@@ -79,9 +70,6 @@ const useStyle = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
   inputRoot: {
     color: "inherit",
   },
@@ -98,31 +86,10 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
-}
-
 const SearchPage = () => {
   const onBackButton = () => {
     window.history.back();
   };
-
-  const handleListItemClick = () => {
-    console.log("Click");
-  };
-
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  /*
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
-*/
-  const [dense] = React.useState(false);
-
   return (
     <div className={useStyle().grow}>
       <AppBar color="white" position="static" className="shadow-none">
@@ -153,28 +120,26 @@ const SearchPage = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <div className="flex justify-around">
-        <Carousel></Carousel>
-      </div>
 
-      <div className={useStyle().root}>
-        <Grid>
-          <Grid>
-            <div className={useStyle().demo}>
-              <List dense={dense}>
-                {generate(
-                  <ListItem onClick={handleListItemClick}>
-                    <ListItemAvatar>
-                      <Avatar src="main/fodderex.png" alt="..." />
-                    </ListItemAvatar>
-                    <ListItemText primary="음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
-                    <Popup />
-                  </ListItem>
-                )}
-              </List>
-            </div>
-          </Grid>
-        </Grid>
+      <div>
+        <ul>
+          <p />
+          <li>
+            <SelectTodayList name="냉장고"></SelectTodayList>
+          </li>
+          <p />
+          <li>
+            <SelectTodayList name="사료"></SelectTodayList>
+          </li>
+          <p />
+          <li>
+            <SelectTodayList name="간식"></SelectTodayList>
+          </li>
+          <p />
+          <li>
+            <SelectTodayList name="간식"></SelectTodayList>
+          </li>
+        </ul>
       </div>
     </div>
   );
