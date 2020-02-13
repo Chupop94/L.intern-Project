@@ -17,6 +17,7 @@ import {
   Badge,
   Checkbox,
   FormControlLabel,
+  ListItemSecondaryAction,
   Button,
 } from "@material-ui/core";
 
@@ -55,7 +56,7 @@ const useStyle = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(8),
+    marginLeft: theme.spacing(9),
   },
   titleItem: {
     margin: theme.spacing(4, 0, 2),
@@ -132,9 +133,9 @@ const btn = [
   },
 ];
 
-const EvaluatePage = () => {
+const ComparePage = () => {
   const [index, setIndex] = useState(1);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [checked, setChecked] = React.useState([1]);
   const [open, setOpen] = React.useState(false);
   const [count, setCount] = useState(0);
   const onPopup = useRef();
@@ -166,6 +167,19 @@ const EvaluatePage = () => {
     },
   ]);
 
+  const handleToggle = value => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
   const onBackButton = () => {
     window.history.back();
   };
@@ -184,7 +198,7 @@ const EvaluatePage = () => {
             <ArrowBackIosIcon />
           </IconButton>
           <Typography className={useStyle().title} variant="h6" color="inherit">
-            입력
+            담은목록
           </Typography>
           <div className="mt-3">
             <Badge color="secondary" badgeContent={count}>
@@ -192,44 +206,32 @@ const EvaluatePage = () => {
             </Badge>
           </div>
         </Toolbar>
-        <Toolbar className="placeholder-black">
-          <div className={useStyle().search}>
-            <div className={useStyle().searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: useStyle().inputRoot,
-                input: useStyle().inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-        </Toolbar>
       </AppBar>
-      <div className="flex justify-around">
-        <Carousel></Carousel>
-      </div>
 
       <div className={useStyle().root}>
         <Grid>
           <Grid>
             <div className={useStyle().demo}>
               <List>
-                {data.map(value => (
-                  <ListItem key={value.id}>
-                    <ListItemAvatar>
-                      <Avatar src="main/fodderex.png" alt="..." />
-                    </ListItemAvatar>
-                    <ListItemText primary="맛있는 음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
-                    <Box display="flex" justifyContent="center">
-                      <Box component="button" className="text-center " borderRadius="50%" {...defaultProps} onClick={() => onPopupClick(value.id)}>
-                        {count}
-                      </Box>
-                    </Box>
-                  </ListItem>
-                ))}
+                {data.map(value => {
+                  const labelId = `checkbox-list-secondary-label-${value}`;
+                  return (
+                    <ListItem key={value.id}>
+                      <ListItemAvatar>
+                        <Avatar src="main/fodderex.png" alt="..." />
+                      </ListItemAvatar>
+                      <ListItemText primary="맛있는 음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
+                      <ListItemSecondaryAction className="items-start">
+                        <Checkbox
+                          edge="end"
+                          onChange={handleToggle(value)}
+                          checked={checked.indexOf(value) !== -1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
                 <Button size="large" variant="contained" color="primary">
                   등록하기
                 </Button>
@@ -242,7 +244,7 @@ const EvaluatePage = () => {
   );
 };
 
-export default EvaluatePage;
+export default ComparePage;
 
 /**
  *   <mobiscroll.Popup ref={onPopup} display="bottom" className="mbsc-justify-content-around">
