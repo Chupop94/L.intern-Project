@@ -8,9 +8,12 @@ import "react-alice-carousel/lib/alice-carousel.css";
 class SearchCarousel extends React.Component {
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  handleClick = () => {
+    console.log(this.props.text);
+  };
   state = {
     galleryItems: this.items.map(i => (
-      <Button variant="outlined" color="primary" size="small" key={i}>
+      <Button onClick={() => alert("#검색어" + i + "가(이) 추가 되었습니다!")} variant="outlined" color="primary" size="small" key={i}>
         #검색어{i}
       </Button>
     )),
@@ -50,7 +53,8 @@ class SearchCarousel extends React.Component {
         onSlideChange={this.onSlideChange}
         onSlideChanged={this.onSlideChanged}
         isPrevSlideDisabled
-        isNextSlideDisabled
+        isNextS
+        lideDisabled
       />
     );
   }

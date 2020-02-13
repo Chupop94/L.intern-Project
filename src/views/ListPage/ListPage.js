@@ -49,6 +49,7 @@ const useStyle = makeStyles(theme => ({
   },
   search: {
     position: "relative",
+    outlineColor: "black",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -71,6 +72,7 @@ const useStyle = makeStyles(theme => ({
     justifyContent: "center",
   },
   inputRoot: {
+    outlineColor: "black",
     color: "inherit",
   },
   inputInput: {
@@ -91,13 +93,13 @@ const SearchPage = () => {
     window.history.back();
   };
   return (
-    <div className={useStyle().grow}>
-      <AppBar color="white" position="static" className="shadow-none">
+    <div className="w-screen">
+      <AppBar position="static" className="shadow-none">
         <Toolbar variant="dense">
-          <IconButton edge="start" className={useStyle().menuButton} color="inherit" aria-label="open drawer" onClick={onBackButton}>
+          <IconButton edge="start" className={useStyle().menuButton} color="default" aria-label="open drawer" onClick={onBackButton}>
             <ArrowBackIosIcon />
           </IconButton>
-          <Typography className={useStyle().title} variant="h6" color="inherit">
+          <Typography className={useStyle().title} color="textPrimary" variant="h6">
             입력
           </Typography>
           <Button>
@@ -110,6 +112,7 @@ const SearchPage = () => {
               <SearchIcon />
             </div>
             <InputBase
+              className="text-black"
               placeholder="Search…"
               classes={{
                 root: useStyle().inputRoot,

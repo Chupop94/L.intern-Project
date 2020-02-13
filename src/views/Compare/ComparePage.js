@@ -1,4 +1,3 @@
-// 홈_입력_검색tab을 눌렀을 때, 밑에서 키보드가 나오는 상황
 import React, { useState, useRef } from "react";
 import {
   makeStyles,
@@ -9,28 +8,27 @@ import {
   IconButton,
   fade,
   Grid,
-  List,
-  Button,
   ListItem,
   ListItemAvatar,
   Avatar,
   ListItemText,
+  List,
   Box,
   Badge,
+  Checkbox,
+  FormControlLabel,
+  Button,
 } from "@material-ui/core";
 
+import SearchIcon from "@material-ui/icons/Search";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ExposurePlus1Icon from "@material-ui/icons/ExposurePlus1";
+import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1";
+import ExposureZeroIcon from "@material-ui/icons/ExposureZero";
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 
 import Carousel from "../../Carousel/Carousel";
-// 자동으로 옆으로 넘어가는 스크롤 => 실시간 검색어 순위 상태bar 같은 것
-
-import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-
-//css
-import "../../assets/sass/Search/searchPage.scss";
 
 mobiscroll.settings = {
   theme: "ios",
@@ -57,7 +55,7 @@ const useStyle = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(6),
+    marginLeft: theme.spacing(8),
   },
   titleItem: {
     margin: theme.spacing(4, 0, 2),
@@ -102,33 +100,7 @@ const useStyle = makeStyles(theme => ({
       },
     },
   },
-  buttonroot: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
 }));
-
-const btn = [
-  {
-    text: "취소",
-    handler: function(event, inst) {
-      inst.hide();
-      mobiscroll.toast({
-        message: "취소 선택",
-      });
-    },
-  },
-  {
-    text: "확인",
-    handler: function(event, inst) {
-      inst.hide();
-      mobiscroll.toast({
-        message: "확인 선택",
-      });
-    },
-  },
-];
 
 const defaultProps = {
   bgcolor: "background.paper",
@@ -137,71 +109,71 @@ const defaultProps = {
   border: 1,
   style: { width: "3rem", height: "3rem" },
 };
+/*
+function generate(element) {
+  return [0, 1, 2, 3].map(value =>
+    React.cloneElement(element, {
+      key: value,
+    })
+  );
+}
+*/
 
-const SearchPage = () => {
-  const onBackButton = () => {
-    window.history.back();
-  };
+const btn = [
+  {
+    text: "먹은 음식 담기",
+    icon: "",
+    handler: function(event, inst) {
+      inst.hide();
+      mobiscroll.toast({
+        message: " 담기 완료! ",
+      });
+    },
+  },
+];
+
+const EvaluatePage = () => {
+  const [index, setIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [open, setOpen] = React.useState(false);
+  const [count, setCount] = useState(0);
+  const onPopup = useRef();
 
   const [data, setData] = useState([
     {
       id: 1,
       data: "일번1",
-      count: 0,
     },
     {
       id: 2,
       data: "일번2",
-      count: 0,
     },
     {
       id: 3,
       data: "일번3",
-      count: 0,
     },
     {
       id: 4,
       data: "일번4",
-      count: 0,
     },
     {
       id: 5,
       data: "일번5",
-      count: 0,
     },
     {
       id: 6,
       data: "일번6",
-      count: 0,
     },
   ]);
 
-  const [index, setIndex] = useState(1);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  /*
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
+  const onBackButton = () => {
+    window.history.back();
   };
-*/
-  const [dense, setDense] = useState(false);
-  const [count, setCount] = useState(1);
-  const [total, setTotal] = useState(0);
-  const onPopup = useRef();
-  const upPopup = useRef();
 
-  //Todo : List를 클릭하면 Popup과 함께 List가 재랜더링 되는 것을 알 수 있음. 최적화 추후 예정
   const onPopupClick = index => {
     console.log(index);
     setIndex(index);
     onPopup.current.instance.show();
-  };
-
-  const upPopupClick = index => {
-    setIndex(index);
-    upPopup.current.instance.show();
-    setTotal(total + 1);
-    console.log(total);
   };
 
   return (
@@ -246,46 +218,56 @@ const SearchPage = () => {
             <div className={useStyle().demo}>
               <List>
                 {data.map(value => (
-                  <div className="flex items-start justify-around">
-                    <ListItem key={value.id} onClick={() => onPopupClick(value.id)}>
-                      <ListItemAvatar>
-                        <Avatar src="main/fodderex.png" alt="..." />
-                      </ListItemAvatar>
-                      <ListItemText primary="음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
-                    </ListItem>
-
-                    <div key={value.id} onClick={() => upPopupClick(value.id)}>
-                      <Box display="flex" justifyContent="center">
-                        <Box component="button" className="text-center " borderRadius="50%" {...defaultProps}>
-                          <AddShoppingCartIcon />
-                        </Box>
+                  <ListItem key={value.id}>
+                    <ListItemAvatar>
+                      <Avatar src="main/fodderex.png" alt="..." />
+                    </ListItemAvatar>
+                    <ListItemText primary="맛있는 음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
+                    <Box display="flex" justifyContent="center">
+                      <Box component="button" className="text-center " borderRadius="50%" {...defaultProps} onClick={() => onPopupClick(value.id)}>
+                        {count}
                       </Box>
-                    </div>
-                  </div>
+                    </Box>
+                  </ListItem>
                 ))}
+                <Button size="large" variant="contained" color="primary">
+                  등록하기
+                </Button>
               </List>
-              <mobiscroll.Popup ref={onPopup} display="center" buttons={null}>
-                <div className="mbsc-align-center mbsc-padding">
-                  <img src="main/fodderex.png" alt="..." />
-                  <h3>생략</h3>
-                  <p>
-                    설명1 <br /> 설명2
-                  </p>
-                </div>
-              </mobiscroll.Popup>
-
-              <mobiscroll.Popup ref={upPopup} display="bottom">
-                <div className="mbsc-align-center mbsc-padding">
-                  <div className="mbsc-col text-center"> 총 담은 개수 : {total} 개</div>
-                </div>
-              </mobiscroll.Popup>
             </div>
           </Grid>
         </Grid>
       </div>
-      <button className="select-button">새로 담기</button>
     </div>
   );
 };
 
-export default SearchPage;
+export default EvaluatePage;
+
+/**
+ *   <mobiscroll.Popup ref={onPopup} display="bottom" className="mbsc-justify-content-around">
+                <div>
+                  <div className="mbsc-row" className="-mr-16">
+                    <div className="mbsc-col">
+                      <Grid container>
+                        <Grid item xs>
+                          <Box component="button" className="text-center " borderRadius="50%" {...defaultProps} onClick={() => setCount(-1)}>
+                            <ExposureNeg1Icon fontSize="small" />
+                          </Box>
+                        </Grid>
+                        <Grid item xs>
+                          <Box component="button" className="text-center " borderRadius="50%" {...defaultProps} onClick={() => setCount(0)}>
+                            <ExposureZeroIcon fontSize="small" />
+                          </Box>
+                        </Grid>
+                        <Grid item xs>
+                          <Box component="button" className="text-center " borderRadius="50%" {...defaultProps} onClick={() => setCount(+1)}>
+                            <ExposurePlus1Icon fontSize="small" />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </div>
+                </div>
+              </mobiscroll.Popup>
+ */

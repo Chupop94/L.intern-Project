@@ -8,13 +8,13 @@ export default class HttpConnect {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-      }
+      },
     };
 
     return await axios
-      .post(`http://localhost:8080${this.url}`, this.data, axiosConfig)
-      .then((response) => {
-        console.log("받은 데이터 : " , response.data);
+      .post(`http://210.93.182.22:8080/edu-1.0${this.url}`, this.data, axiosConfig)
+      .then(response => {
+        console.log("받은 데이터 : ", response.data);
         return response.data;
       })
       .catch(error => {
