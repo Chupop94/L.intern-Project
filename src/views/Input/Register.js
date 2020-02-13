@@ -91,7 +91,7 @@ export default class Register extends PureComponent {
               </small>
             )
         })
-    : (e.target.value.length < 11 ?
+    : (e.target.value.length > 0 && e.target.value.length < 11 ?
     this.setState({
         phoneError: (
           <small className="text-danger">

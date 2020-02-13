@@ -1,11 +1,8 @@
 import React, { PureComponent } from "react";
-import { FormGroup, FormControl, FormLabel, Button } from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button } from "@material-ui/core";
 import HttpConnect from "../../http/HttpConnect";
-import { Card, CardContent} from "@material-ui/core";
-import { GoogleLogin } from "react-google-login";
-import KakaoLoginProps from "react-kakao-login";
 
-import styled from "styled-components";
 //css
 import "../../assets/sass/Login/login.scss";
 
@@ -18,27 +15,9 @@ export default class Login extends PureComponent {
       emailLogin: "",
       emailErrorLogin: null,
       passwordLogin: "",
-      passwordErrorLogin: null,
+      passwordErrorLogin: null
     };
   }
-
-  // Google Login
-  responseGoogle = res => {
-    this.setState({
-      id: res.googleId,
-      name: res.profileObj.name,
-      provider: "google",
-    });
-  };
-
-  // Kakao Login
-  responseKakao = res => {
-    this.setState({
-      id: res.profile.id,
-      name: res.profile.properties.nickname,
-      provider: "kakao",
-    });
-  };
 
   // login errer
   responseFail = err => {
@@ -47,7 +26,7 @@ export default class Login extends PureComponent {
 
   handleLoginEmail(event) {
     this.setState({
-      emailLogin: event.target.value,
+      emailLogin: event.target.value
     });
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -57,18 +36,22 @@ export default class Login extends PureComponent {
             <small className="text-danger">
               이메일 형식이 맞지 않습니다. <i>john@doe.com</i>.
             </small>
-          ),
+          )
         })
       : this.setState({ emailErrorLogin: null });
   }
   handleLoginPassword(event) {
     this.setState({
-      passwordLogin: event.target.value,
+      passwordLogin: event.target.value
     });
 
     event.target.value.length > 0 && event.target.value.length < 6
       ? this.setState({
-          passwordErrorLogin: <small className="text-danger">비밀번호는 최소 6자리 이상 입력해야 합니다.</small>,
+          passwordErrorLogin: (
+            <small className="text-danger">
+              비밀번호는 최소 6자리 이상 입력해야 합니다.
+            </small>
+          )
         })
       : this.setState({ passwordErrorLogin: null });
   }
@@ -79,7 +62,7 @@ export default class Login extends PureComponent {
   clearInput = () => {
     this.setState({
       emailLogin: "",
-      passwordLogin: "",
+      passwordLogin: ""
     });
   };
 
@@ -94,7 +77,7 @@ export default class Login extends PureComponent {
 
     http.data = JSON.stringify({
       email: this.state.emailLogin,
-      password: this.state.passwordLogin,
+      password: this.state.passwordLogin
     });
 
     http.getCallData().then(data => {
@@ -132,7 +115,7 @@ export default class Login extends PureComponent {
 
       // 처음의 경우 펫 정보를 입력하는 화면으로 이동
       if (data === "") {
-        window.location.href="/PetInfo";
+        window.location.href = "/PetInfo";
       } else {
         // 펫 정보를 sessionStorage(로컬)에 저장
         window.sessionStorage.setItem(`pet`, JSON.stringify(data));
@@ -151,12 +134,16 @@ export default class Login extends PureComponent {
             <small className="text-danger">
               이메일 형식이 맞지 않습니다. <i>john@doe.com</i>.
             </small>
-          ),
+          )
         })
       : this.setState({ emailErrorLogin: null });
     this.state.passwordLogin.length < 6
       ? this.setState({
-          passwordErrorLogin: <small className="text-danger">비밀번호는 최소 6자리 이상 입력해야 합니다.</small>,
+          passwordErrorLogin: (
+            <small className="text-danger">
+              비밀번호는 최소 6자리 이상 입력해야 합니다.
+            </small>
+          )
         })
       : this.setState({ passwordErrorLogin: null });
     if (
@@ -167,76 +154,79 @@ export default class Login extends PureComponent {
     }
   };
 
+  handleRegister = () => {
+    window.location.href="./Register";
+  }
+
   render() {
     return (
       <div className="scroll_fix">
-        <form className="mt-40">
-          <Card>
-            <CardContent>
-            <div>
-            <h2 className="text-center">Login</h2>
-                <FormGroup>
-                  <FormLabel>
-                    이메일 주소: <span className="star">*</span>
-                  </FormLabel>
-                  <FormControl type="text" value={this.state.emailLogin} name="email" onChange={event => this.handleLoginEmail(event)} />
-                  {this.state.emailErrorLogin}
-                </FormGroup>
-                <FormGroup>
-                  <FormLabel>
-                    비밀번호: <span className="star">*</span>
-                  </FormLabel>
-                  <FormControl type="password" value={this.state.passwordLogin} name="password" onChange={event => this.handleLoginPassword(event)} />
-                  {this.state.passwordErrorLogin}
-                </FormGroup>
-                <div className="category">
-                  <span className="star">*</span> 필수 입력
-                </div>
-
-                <div className="flex items-start">
-                  <div className="flex-1 text-center">
-                    {" "}
-                    <GoogleLogin
-                      clientId={process.env.React_APP_Google}
-                      buttonText="Google"
-                      onSuccess={this.responseGoogle}
-                      onFailure={this.responseFail}
-                    />
-                  </div>
-                  <div className="flex-1 flex-center">
-                    <KakaoButton
-                      jsKey={process.env.React_APP_Kakao}
-                      buttonText="Kakao"
-                      onSuccess={this.responseKakao}
-                      onFailure={this.responseFail}
-                      getProfile="true"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <Button variant="info" size="lg" onClick={this.handleLoginSubmit.bind(this)}>
-                  로그인
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </form>
+        <div className="mt-20">
+          <div className="login_img">
+            <ul>
+              <li>
+                <img src="/main/LoginDog.png" alt="login" />
+              </li>
+              <li className="login_font">Pare</li>
+            </ul>
+          </div>
+          <div className="text-right">
+            <span className="star">*</span> 필수 입력
+          </div>
+          <FormGroup className="login-form">
+            <FormLabel>
+              이메일 주소: <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              className="rounded-full"
+              type="text"
+              value={this.state.emailLogin}
+              name="email"
+              onChange={event => this.handleLoginEmail(event)}
+            />
+            {this.state.emailErrorLogin}
+          </FormGroup>
+          <FormGroup className="login-form">
+            <FormLabel>
+              비밀번호: <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              className="rounded-full"
+              type="password"
+              value={this.state.passwordLogin}
+              name="password"
+              onChange={event => this.handleLoginPassword(event)}
+            />
+            {this.state.passwordErrorLogin}
+          </FormGroup>
+          <div className="flex justify-around items-center">
+              <img src="/main/icons/google.png" className="icons" alt="google"/>
+              <img src="/main/icons/naver.png" className="icons" alt="google"/>
+              <img src="/main/icons/twitter.png" className="icons" alt="google"/>
+              <img src="/main/icons/facebook.png" className="icons" alt="google"/>
+              <img src="/main/icons/kakao.png" className="icons" alt="google"/>
+          </div>
+          <p/>
+          <div className="button-list">
+            <Button
+            variant="contained"
+              color="secondary"
+              size="large"
+              onClick={this.handleLoginSubmit.bind(this)}
+            >
+              로그인
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={this.handleRegister.bind(this)}
+            >
+              회원가입
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
 }
-
-const KakaoButton = styled(KakaoLoginProps)`
-  padding 0;
-  width: 110px;
-  height: 44px;
-  line-height:44px;
-  color: #783c00;
-  background-color: #FFEB00;
-  border : 1px solid transparent;
-  border-radius: 3px;
-  font-size:16px;
-  font-weight: bold;
-  text-align : center;
-`;

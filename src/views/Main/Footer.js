@@ -15,7 +15,7 @@ export default class Footer extends PureComponent {
         window.location.href = "/Home";
         break;
       case 2:
-        window.location.href = "/";
+        window.location.href = "/SearchPage";
         break;
       case 3:
         window.location.href = "/";
@@ -24,33 +24,10 @@ export default class Footer extends PureComponent {
         window.location.href = "/UserPage";
         break;
       case 5:
-        window.location.href = "/SearchPage";
+        window.location.href = "/ListPage";
         break;
       default:
         break;
-    }
-  };
-
-  getLocationColorHome = () => {
-    // 홈 화면에 있는 경우
-    if (window.location.href.indexOf("/Home") === -1) {
-      return (
-        <ul>
-          <li>
-            <AiFillHome />
-          </li>
-          <li className="text-xs pt-2">홈</li>
-        </ul>
-      );
-    } else {
-      return (
-        <ul className="orange-color">
-          <li>
-            <AiFillHome />
-          </li>
-          <li className="text-xs pt-2">홈</li>
-        </ul>
-      );
     }
   };
 
@@ -89,11 +66,14 @@ export default class Footer extends PureComponent {
               <li className="text-xs pt-2">검색</li>
             </ul>
           </IconButton>
-          <button className="middle-button" onClick={e => this.handleMovePage(5)}>
-            <div className="plus-icon-div">
-              <AiOutlinePlus size="40px" />
-            </div>
-          </button>
+            <button
+              className="middle-button"
+              onClick={e => this.handleMovePage(5)}
+            >
+              <div className="plus-icon-div">
+                <AiOutlinePlus size="40px" />
+              </div>
+            </button>
           <IconButton
             className="tab-item"
             onClick={e => this.handleMovePage(3)}

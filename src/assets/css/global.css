@@ -7,6 +7,7 @@
   color:grey;
   background:white;
   z-index:100;
+  box-shadow: 1px 0 10px #cccccc;
 }
 
 .button_flex {
@@ -28,7 +29,6 @@
 }
 
 .middle-button {
-    margin-top:-50px;
     width: 80px;
     height: 80px;
     background-color: rgb(255, 96, 52);
@@ -39,6 +39,9 @@
     line-height: 70px;
     color: white;
     text-align:center;
+
+    margin-top:-50px;
+    box-shadow: 0 -1px 1px 0 #cccccc;
 }
 
 .menu-item-li {
@@ -58,13 +61,6 @@
   justify-content: center;
 }
 
-.scroll_fix {
-  background-color: black;
-  height: 100vh;
-  min-height: 100vh;
-  overflow: hidden !important;
-  touch-action: none;
-}
 
 .fab:focus {
     outline:none !important;

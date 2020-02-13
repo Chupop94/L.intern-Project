@@ -103,6 +103,8 @@ const PetInfo = () => {
     });
   };
 
+  
+
   const hasExtension = fileName => {
     const pattern = "(" + imgExtension.join("|").replace(/\./g, "\\.") + ")$";
     return new RegExp(pattern, "i").test(fileName);

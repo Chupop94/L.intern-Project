@@ -31,6 +31,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 //css
 import "../../assets/sass/Search/searchPage.scss";
+import Headbar from "../../components/Toolbar/Headbar.js";
 
 mobiscroll.settings = {
   theme: "ios",
@@ -41,7 +42,7 @@ const useStyle = makeStyles(theme => ({
   root: {
     width: "w-screen",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   grow: {
     flexGrow: 1,
@@ -57,10 +58,10 @@ const useStyle = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(6),
+    marginLeft: theme.spacing(6)
   },
   titleItem: {
-    margin: theme.spacing(4, 0, 2),
+    margin: theme.spacing(4, 0, 2)
   },
   search: {
     position: "relative",
@@ -86,7 +87,7 @@ const useStyle = makeStyles(theme => ({
     justifyContent: "center",
   },
   demo: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   inputRoot: {
     color: "inherit",
@@ -206,36 +207,7 @@ const SearchPage = () => {
 
   return (
     <div className={useStyle().grow}>
-      <AppBar color="white" position="static" className="shadow-none">
-        <Toolbar variant="dense">
-          <IconButton edge="start" className={useStyle().menuButton} color="inherit" aria-label="open drawer" onClick={onBackButton}>
-            <ArrowBackIosIcon />
-          </IconButton>
-          <Typography className={useStyle().title} variant="h6" color="inherit">
-            입력
-          </Typography>
-          <div className="mt-3">
-            <Badge color="secondary" badgeContent={count}>
-              <img className="h-10 w-10" src="main/bone.png" alt="..." />
-            </Badge>
-          </div>
-        </Toolbar>
-        <Toolbar className="placeholder-black">
-          <div className={useStyle().search}>
-            <div className={useStyle().searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: useStyle().inputRoot,
-                input: useStyle().inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
+      <Headbar title="입력" input={true}></Headbar>
       <div className="flex justify-around">
         <Carousel></Carousel>
       </div>
@@ -283,9 +255,8 @@ const SearchPage = () => {
           </Grid>
         </Grid>
       </div>
-      <button className="select-button">새로 담기</button>
     </div>
   );
 };
 
-export default SearchPage;
+export default React.memo(SearchPage);

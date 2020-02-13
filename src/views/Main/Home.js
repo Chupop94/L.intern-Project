@@ -1,15 +1,9 @@
 import React, { PureComponent } from "react";
 import Redirect from "../../security/Redirect";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Avatar,
-  ListItemAvatar
-} from "@material-ui/core";
 
 // css import
 import "../../assets/sass/Main/home.scss";
+import HomeList from "../../components/List/HomeList";
 
 export default class Home extends PureComponent {
   constructor(props) {
@@ -24,12 +18,38 @@ export default class Home extends PureComponent {
       member: JSON.parse(window.sessionStorage.getItem("member")),
       pet: JSON.parse(window.sessionStorage.getItem("pet")),
       month: date.getMonth() + 1,
-      day: date.getDate()
+      day: date.getDate(),
+      value : [
+        {
+          id : 1,
+          name : "개사료",
+          fimg : "/main/fodderex.png",
+          limg : "/main/smile.png"
+        },
+        {
+          id : 2,
+          name : "고양이 사료",
+          fimg : "/main/fodderex.png",
+          limg : "/main/smile.png"
+        },
+        {
+          id : 3,
+          name : "물고기 사료",
+          fimg : "/main/fodderex.png",
+          limg : "/main/smile.png"
+        },
+        {
+          id : 4,
+          name : "킹냥이 사료",
+          fimg : "/main/fodderex.png",
+          limg : "/main/smile.png"
+        },
+      ]
     };
   }
 
   onSearchPage = e => {
-    window.location.href = "/SearchPage";
+    window.location.href = "/ListPage";
   };
 
   render() {
@@ -57,21 +77,7 @@ export default class Home extends PureComponent {
           </button>
         </div>
         <div className="bottom-div">
-          <List className="list">
-            {[0, 1, 2, 3, 4, 5, 6].map(value => {
-              return (
-                <ListItem className="item" key={value} button>
-                  <ListItemAvatar>
-                    <Avatar src="/main/fodderex.png"></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText className="text">hello</ListItemText>
-                  <ListItemAvatar className="secondIcon">
-                    <Avatar src="/main/smile.png"></Avatar>
-                  </ListItemAvatar>
-                </ListItem>
-              );
-            })}
-          </List>
+          <HomeList value={this.state.value}></HomeList>
         </div>
       </div>
     );
