@@ -34,10 +34,8 @@
 }
 
 .button-list {
-    position: relative;
-    width:80vw;
-    left:10vw;
     display:flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    color:white;
 }

@@ -209,18 +209,15 @@ export default class Login extends PureComponent {
           <p/>
           <div className="button-list">
             <Button
-            variant="contained"
-              color="secondary"
-              size="large"
               onClick={this.handleLoginSubmit.bind(this)}
+              className="text-white"
             >
               로그인
             </Button>
+            /
             <Button
-              variant="contained"
-              color="secondary"
-              size="large"
               onClick={this.handleRegister.bind(this)}
+              className="text-white"
             >
               회원가입
             </Button>

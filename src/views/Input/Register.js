@@ -14,11 +14,11 @@ export default class Register extends PureComponent {
       emailError: null,
       password: "",
       passwordError: null,
-      name : "", // 닉네임
-      age : "",
-      ageError : null,
-      phone : "",
-      phoneError : null,
+      name: "", // 닉네임
+      age: "",
+      ageError: null,
+      phone: "",
+      phoneError: null
     };
   }
 
@@ -60,72 +60,74 @@ export default class Register extends PureComponent {
   // 나이 검사
   handleLoginAge = e => {
     this.setState({
-        age: e.target.value
+      age: e.target.value
     });
 
     var regexp = /^[0-9]*$/;
 
-    regexp.test(e.target.value) === false ?
-        this.setState({
-            ageError: (
-              <small className="text-danger">
-                나이는 숫자만 입력해야 합니다.
-              </small>
-            )
+    regexp.test(e.target.value) === false
+      ? this.setState({
+          ageError: (
+            <small className="text-danger">
+              나이는 숫자만 입력해야 합니다.
+            </small>
+          )
         })
-    : this.setState({ageError : null});
+      : this.setState({ ageError: null });
   };
 
   // 전화번호 검사
   handleLoginPhone = e => {
     this.setState({
-        phone : e.target.value
+      phone: e.target.value
     });
     var regexp = /^[0-9]*$/;
 
-    regexp.test(e.target.value) === false ?
-        this.setState({
-            phoneError: (
-              <small className="text-danger">
-                핸드폰 번호는 숫자만 입력해야 합니다.
-              </small>
-            )
+    regexp.test(e.target.value) === false
+      ? this.setState({
+          phoneError: (
+            <small className="text-danger">
+              핸드폰 번호는 숫자만 입력해야 합니다.
+            </small>
+          )
         })
-    : (e.target.value.length > 0 && e.target.value.length < 11 ?
-    this.setState({
-        phoneError: (
-          <small className="text-danger">
-            핸드폰 번호는 11자리를 반드시 입력해야 합니다.
-          </small>
-        )
-    }) :
-    this.setState({phoneError : null}));
+      : e.target.value.length > 0 && e.target.value.length < 11
+      ? this.setState({
+          phoneError: (
+            <small className="text-danger">
+              핸드폰 번호는 11자리를 반드시 입력해야 합니다.
+            </small>
+          )
+        })
+      : this.setState({ phoneError: null });
   };
 
   // 이름 변경
   handleLoginName = e => {
-      this.setState({
-          name : e.target.value
-      });
-  }
+    this.setState({
+      name: e.target.value
+    });
+  };
 
-   //필수입력 값이 제대로 채워져있는지 확인. (없으면 0, 모두 있으면 1)
-   onCheckForm = () => {
-    if(this.state.emailError != null || 
-        this.state.passwordError != null || 
-        this.state.name === '' ||
-        this.state.ageError != null || 
-        this.state.phoneError != null) {
+  //필수입력 값이 제대로 채워져있는지 확인. (없으면 0, 모두 있으면 1)
+  onCheckForm = () => {
+    if (
+      this.state.emailError != null ||
+      this.state.passwordError != null ||
+      this.state.name === "" ||
+      this.state.ageError != null ||
+      this.state.phoneError != null
+    ) {
       return 0;
     }
     return 1;
   };
 
   // 데이터 전송
-  submitMemberData = (e) => {
+  submitMemberData = e => {
     const checkform = this.onCheckForm();
 
-    if(checkform === 0) {
+    if (checkform === 0) {
       alert("필수 입력칸이 비었거나, 잘못 입력되었습니다.");
       return;
     }
@@ -134,11 +136,11 @@ export default class Register extends PureComponent {
     http.url = "/member/insert";
     // JSON.parse(window.sessionStorage.getItem('member')).member_No,
     http.data = JSON.stringify({
-      name : this.state.name,
-      age : this.state.age,
-      phoneNum : this.state.phone,
-      email : this.state.email,
-      password : this.state.password
+      name: this.state.name,
+      age: this.state.age,
+      phoneNum: this.state.phone,
+      email: this.state.email,
+      password: this.state.password
     });
 
     console.log(http.data);
@@ -146,90 +148,101 @@ export default class Register extends PureComponent {
     http.getCallData().then(data => {
       console.log(data);
 
-      if (data === 1 ){
+      if (data === 1) {
         alert("회원가입에 성공했습니다. !");
-        window.location.href='/';
+        window.location.href = "/";
       } else {
         alert("회원가입에 실패했습니다. !");
       }
     });
-  }
+  };
 
   render() {
     return (
-      <Card>
-      <CardHeader 
-      title="회원가입"
-      />
-        <div className="float-right mr-1">
-        <span className="star">*</span>는 필수입력
-      </div>
-      <CardContent>
-        <FormGroup>
-          <FormLabel>
-            이메일 주소(계정) <span className="star">*</span>
-          </FormLabel>
-          <FormControl
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={event => this.handleLoginEmail(event)}
-          />
-          {this.state.emailError}
-        </FormGroup>
-        <FormGroup>
-          <FormLabel>
-            비밀번호 <span className="star">*</span>
-          </FormLabel>
-          <FormControl
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={event => this.handleLoginPassword(event)}
-          />
-          {this.state.passwordError}
-        </FormGroup>
-        <FormGroup>
-          <FormLabel>
-            이름 <span className="star">*</span>
-          </FormLabel>
-          <FormControl
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={event => this.handleLoginName(event)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel>
-            나이 <span className="star">*</span>
-          </FormLabel>
-          <FormControl
-            type="text"
-            name="age"
-            value={this.state.age}
-            onChange={event => this.handleLoginAge(event)}
-          />
-          {this.state.ageError}
-        </FormGroup>
-        <FormGroup>
-          <FormLabel>
-            핸드폰 번호 <span className="star">*</span>
-          </FormLabel>
-          <FormControl
-            type="text"
-            name="phone"
-            maxLength="11"
-            value={this.state.phone}
-            onChange={event => this.handleLoginPhone(event)}
-          />
-          {this.state.phoneError}
-        </FormGroup>
-        <FormGroup className="text-center pt-10">
-          <button className="button button1" onClick={event => this.submitMemberData(event)}>입력완료</button>
-        </FormGroup>
+      <div className="w-screen bg-red-200">
+        <div className="flex justify-center pt-4 ml-5">
+            <div>
+              <img src="/main/RegisterDog.png" alt="rdog" />
+            </div>
+            <div>
+              <img src="/main/RegisterChat.png" alt="rchat" />
+            </div>
+        </div>
+        <h1 className="text-white text-center pt-3"><b>회원가입</b></h1>
+        
+        <CardContent>
+          <FormGroup>
+            <FormLabel>
+              이메일 주소(계정) <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={event => this.handleLoginEmail(event)}
+            />
+            {this.state.emailError}
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>
+              비밀번호 <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={event => this.handleLoginPassword(event)}
+            />
+            {this.state.passwordError}
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>
+              이름 <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={event => this.handleLoginName(event)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>
+              나이 <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              type="text"
+              name="age"
+              value={this.state.age}
+              onChange={event => this.handleLoginAge(event)}
+            />
+            {this.state.ageError}
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>
+              핸드폰 번호 <span className="star">*</span>
+            </FormLabel>
+            <FormControl
+              type="text"
+              name="phone"
+              maxLength="11"
+              value={this.state.phone}
+              onChange={event => this.handleLoginPhone(event)}
+            />
+            {this.state.phoneError}
+          </FormGroup>
+          <FormGroup className="text-center pt-8">
+            <button
+              onClick={event => this.submitMemberData(event)}
+            >
+            <img width="80px" height="80px" src="/main/pet-food.png" alt="food" />
+            </button>
+          </FormGroup>
         </CardContent>
-      </Card>
+        <div className="flex justify-center">
+          
+        </div>
+      </div>
     );
   }
 }

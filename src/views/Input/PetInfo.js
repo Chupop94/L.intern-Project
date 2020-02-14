@@ -240,8 +240,9 @@ const PetInfo = () => {
 };
 
   return (
-    <Card>
-      <div className="bg-yellow-100 pt-4 h-64">
+    <div className="div-full">
+      <h2 className="text-center text-white pt-4"><b>반려견 정보 등록</b></h2>
+      <div className="pt-4 h-64">
         <div className="profile-photo-div">
           <Avatar
             src={pictures}
@@ -253,11 +254,8 @@ const PetInfo = () => {
             ref={input => (inputElement = input)}
             className="hidden"
             name="pet_img"
-            // name={this.props.name}
-            // multiple={!this.props.singleImage}
             onChange={onDropFile}
             onClick={onUploadClick}
-            // accept={this.props.accept}
           />
           <MdPhoto className="photo-icon" />
         </div>
@@ -329,12 +327,14 @@ const PetInfo = () => {
             onChange={e => onChangePetChar(e)}
           />
         </FormGroup>
-        <FormGroup className="text-center pt-10">
-          <button className="button button1" onClick={e => submitPetData(e)}>입력완료</button>
+        <FormGroup className="text-center pt-8">
+          <button onClick={e => submitPetData(e)}>
+            <img src="/main/petInfo.png" width="80px" height="80px" alt="petInfo"/>
+          </button>
         </FormGroup>
       </CardContent>
-    </Card>
+      </div>
   );
 };
 
-export default React.memo(PetInfo);
+export default PetInfo;
