@@ -21,11 +21,9 @@ import {
   Button,
 } from "@material-ui/core";
 
-import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ExposurePlus1Icon from "@material-ui/icons/ExposurePlus1";
-import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1";
-import ExposureZeroIcon from "@material-ui/icons/ExposureZero";
+import ControlPointIcon from "@material-ui/icons/ControlPoint";
+
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 
@@ -47,6 +45,11 @@ const useStyle = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  ButtonMiddle: {
+    width: 200,
+    height: 100,
+    display: "flex",
   },
   iconflex: {
     marginLeft: theme.spacing(3),
@@ -108,7 +111,7 @@ const defaultProps = {
   borderColor: "text.primary",
   m: 1,
   border: 1,
-  style: { width: "3rem", height: "3rem" },
+  style: { width: "21rem", height: "6rem" },
 };
 /*
 function generate(element) {
@@ -136,8 +139,10 @@ const btn = [
 const ComparePage = () => {
   const [index, setIndex] = useState(1);
   const [checked, setChecked] = React.useState([1]);
-  const [open, setOpen] = React.useState(false);
   const [count, setCount] = useState(0);
+  const [isActive, setActive] = useState(false);
+  const [topBlock, setBlock] = useState(false);
+
   const onPopup = useRef();
 
   const [data, setData] = useState([
@@ -190,6 +195,18 @@ const ComparePage = () => {
     onPopup.current.instance.show();
   };
 
+  const handleShow = () => {
+    setActive(true);
+  };
+
+  const handleHide = () => {
+    setActive(false);
+  };
+
+  const handleBlock = () => {
+    setBlock(true);
+  };
+
   return (
     <div className={useStyle().grow}>
       <AppBar color="white" position="static" className="shadow-none">
@@ -208,6 +225,24 @@ const ComparePage = () => {
         </Toolbar>
       </AppBar>
 
+      <div className={useStyle().ButtonMiddle}>
+        {topBlock ? (
+          <Box display="flex" justifyContent="center">
+            <Box component="button" className="text-center" borderRadius={16} {...defaultProps} onClick={handleShow}>
+              <ControlPointIcon />
+              <h6>담기완료</h6>
+            </Box>
+          </Box>
+        ) : (
+          <Box display="flex" justifyContent="center">
+            <Box component="button" className="text-center" borderRadius={16} {...defaultProps} onClick={handleShow}>
+              <ControlPointIcon />
+              <h6>비교하고 싶은 사료를 등록하세요.</h6>
+            </Box>
+          </Box>
+        )}
+      </div>
+
       <div className={useStyle().root}>
         <Grid>
           <Grid>
@@ -221,20 +256,17 @@ const ComparePage = () => {
                         <Avatar src="main/fodderex.png" alt="..." />
                       </ListItemAvatar>
                       <ListItemText primary="맛있는 음식List" secondary={<React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>} />
-                      <ListItemSecondaryAction className="items-start">
-                        <Checkbox
-                          edge="end"
-                          onChange={handleToggle(value)}
-                          checked={checked.indexOf(value) !== -1}
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </ListItemSecondaryAction>
+
+                      {isActive && (
+                        <ListItemSecondaryAction className="items-start">
+                          <Button size="small" variant="contained" onClick={handleBlock}>
+                            담기
+                          </Button>
+                        </ListItemSecondaryAction>
+                      )}
                     </ListItem>
                   );
                 })}
-                <Button size="large" variant="contained" color="primary">
-                  등록하기
-                </Button>
               </List>
             </div>
           </Grid>
