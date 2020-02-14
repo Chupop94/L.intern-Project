@@ -1,0 +1,37 @@
+.card-list {
+    position: relative;
+    left:5%;
+    width:90%;
+}
+
+.card {
+    position: relative;
+    border-radius:50%;
+}
+
+.card-header-div {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:-20px;
+    height:80px;
+    background:white;
+    font-size:20px;
+}
+
+.back {
+    background:white;
+}
+
+.avatar {
+    width:50px;
+    height:50px;
+}
+
+.card-content {
+    display:flex;
+    justify-content: flex-start;
+    font-size:10px;
+    flex-flow:wrap;
+    margin-top:-35px;
+}
