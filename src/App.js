@@ -8,7 +8,8 @@ import UserPage from "./views/User/UserPage";
 import Register from "./views/Input/Register";
 import ListPage from "./views/ListPage/ListPage";
 import InputPage from "./views/Search/InputPage";
-import Compare from "./views/Compare/ComparePage";
+import Compare from "./views/Compare/Compare";
+import CompareSecond from "./views/Compare/CompareSecond";
 
 function App() {
   return (
@@ -22,12 +23,10 @@ function App() {
       <Route path="/ListPage" component={ListPage} />
       <Route path="/InputPage" component={InputPage} />
       <Route path="/Compare" component={Compare} />
+      <Route path="/CompareSecond" component={CompareSecond} />
       {window.sessionStorage.getItem("pet") != null ? <div className="div-tab-block"></div> : null}
     </div>
   );
 }
 
 export default React.memo(App);
-
-//전체: https://www.figma.com/file/DhAkvK5MxCVIse8Httvg3R/Pare-%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9C%EB%B0%9C?node-id=1%3A334
-//부분: https://www.figma.com/file/DhAkvK5MxCVIse8Httvg3R/Pare-%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9C%EB%B0%9C?node-id=469%3A1472

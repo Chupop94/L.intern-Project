@@ -1,73 +1,76 @@
 .home {
-    width:100vw;
+  width: 100vw;
 
-    .middle-div {
-        position: relative;
-        margin-top:-30px;
-        text-align: center;
-        img {
-            width:165px;
-            height:60px;
-        }
+  .middle-div {
+    position: relative;
+    margin-top: -30px;
+    text-align: center;
+    img {
+      width: 165px;
+      height: 60px;
     }
-    
-    .top-div {
-        height:370px;
-        background:rgb(255, 181, 63);
-        border-bottom-left-radius: 50px;
-        border-bottom-right-radius: 50px;
+  }
 
-        .textBox {
-            padding-left:40px;
-            padding-top:40px;
-            color:white;
+  .top-div {
+    height: 370px;
+    background: rgb(255, 181, 63);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 
-            .line-1 { //날짜 text
-                font-weight:lighter;
-                font-size:13px;
-            }
+    .textBox {
+      padding-left: 40px;
+      padding-top: 40px;
+      color: white;
 
-            .line-2 { //반려견 이름 text
-                font-size:20px;
-                font-weight: 500;
-            }
+      .line-1 {
+        //날짜 text
+        font-weight: lighter;
+        font-size: 13px;
+      }
 
-            .line-3 { //1일 입맛 상태 text
-                font-size:30px;
-                border-bottom : 1px solid white;
-            }
-        }
+      .line-2 {
+        //반려견 이름 text
+        font-size: 20px;
+        font-weight: 500;
+      }
 
-        .imgBox {
-            padding-top:50px;
-            display:flex;
-            justify-content: center;
-            img {
-                width:100px;
-                height:145px;
-            }
-        }
+      .line-3 {
+        //1일 입맛 상태 text
+        font-size: 30px;
+        border-bottom: 1px solid white;
+      }
     }
 
-    .bottom-div {
-        .list {
-            .item {
-                left:50vw;
-                width:300px;
-                margin-left:-150px;
-                background:pink;
-                margin-top:15px;
-                height:80px;
-                border-radius: 10px;
-            }
-
-            .secondIcon {
-                padding-left:20px;
-            }
-
-            .text {
-                //text-align:center;
-            }
-        }
+    .imgBox {
+      padding-top: 50px;
+      display: flex;
+      justify-content: center;
+      img {
+        width: 100px;
+        height: 145px;
+      }
     }
+  }
+
+  .bottom-div {
+    .list {
+      .item {
+        left: 50vw;
+        width: 300px;
+        margin-left: -150px;
+        background: pink;
+        margin-top: 15px;
+        height: 80px;
+        border-radius: 10px;
+      }
+
+      .secondIcon {
+        padding-left: 20px;
+      }
+
+      .text {
+        //text-align:center;
+      }
+    }
+  }
 }

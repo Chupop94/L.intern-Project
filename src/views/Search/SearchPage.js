@@ -42,7 +42,7 @@ const useStyle = makeStyles(theme => ({
   root: {
     width: "w-screen",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   grow: {
     flexGrow: 1,
@@ -58,10 +58,10 @@ const useStyle = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(6)
+    marginLeft: theme.spacing(6),
   },
   titleItem: {
-    margin: theme.spacing(4, 0, 2)
+    margin: theme.spacing(4, 0, 2),
   },
   search: {
     position: "relative",
@@ -87,7 +87,7 @@ const useStyle = makeStyles(theme => ({
     justifyContent: "center",
   },
   demo: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   inputRoot: {
     color: "inherit",

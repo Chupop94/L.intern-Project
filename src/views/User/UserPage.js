@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import { makeStyles, Divider, AppBar, Toolbar, Typography, Button, IconButton, Avatar, MenuItem, MenuList, Paper } from "@material-ui/core";
+import { makeStyles, FormGroup, Divider, AppBar, Toolbar, Button, IconButton, Avatar, MenuItem, MenuList, Paper } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
-//import Popup from "reactjs-popup";
+//css
+import Headbar from "../../components/Toolbar/Headbar.js";
+import "../../assets/sass/UserPage/user.scss";
 
-import Tag from "../../tag/Tag.js";
-//Relative imports outside of src/ are not supported.
-//import avatar from "../../../public/main/shiba.jpg";
+import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
+import CategoryOutlinedIcon from "@material-ui/icons/CategoryOutlined";
+import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
+import LockOpenOutlinedIcon from "@material-ui/icons/LockOpenOutlined";
+import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
 
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import MenuIcon from "@material-ui/icons/Menu";
+import { IoIosArrowBack } from "react-icons/io";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,6 +53,9 @@ const useStyles = makeStyles(theme => ({
     //marginLeft: -theme.spacing(12.5),
     border: "5px solid #E8E8E8",
   },
+  app_bar: {
+    boxShadow: "none",
+  },
 }));
 
 const UserPage = () => {
@@ -59,70 +66,70 @@ const UserPage = () => {
     window.location.href = "/";
   };
 
+  const onBackButton = () => {
+    window.history.back();
+  };
 
   return (
-    <div>
-      <div className={useStyles().grow}>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <IconButton edge="start" className={useStyles().menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-              UserPage
-            </Typography>
-            <div className="flex justify-end">
-              <Button simple="true">
-                <FacebookIcon fontSize="small" color="action" />
-              </Button>
-              <Button simple="true">
-                <InstagramIcon fontSize="small" color="action" />
-              </Button>
-              <Button simple="true">
-                <TwitterIcon fontSize="small" color="action" />
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-
-      <div className="flex justify-center">
-        <Avatar src={pet.petImg} alt="..." className={useStyles().large} />
-      </div>
-      <div className="text-center">
-        <h4 className="title">
-          Name
-          <br />
-          <small>추가부분</small>
-        </h4>
-        <Divider />
-        <br />
-        <Tag></Tag>
-        <Divider />
-      </div>
+    <div className="div-full">
+      <h2 className="text-center text-white pt-4">
+        <b>마이 페이지</b>
+      </h2>
 
       <div>
-        <Paper>
-          <MenuList>
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem>example</MenuItem>
-            <Divider />
-            <MenuItem onClick={e => handleLogout()}>로그아웃</MenuItem>
-          </MenuList>
-        </Paper>
+        <div className="flex justify-center">
+          <Avatar src={pet.petImg} alt="..." className={useStyles().large} />
+        </div>
+        <div className="text-center">
+          <h4 className="title">
+            {pet.name}
+            <br />
+            <small>나이 : {pet.age}쨜</small>
+            <br />
+            <small>종 : 안얄랴줌</small>
+          </h4>
+        </div>
+
+        <div>
+          <Paper className="div-full">
+            <MenuList>
+              <MenuItem>
+                <SettingsOutlinedIcon fontSize="small" />
+                설정
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <NotificationsActiveOutlinedIcon fontSize="small" />
+                알림
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <CategoryOutlinedIcon fontsize="small" />
+                광고
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <HelpOutlineOutlinedIcon fontsize="small" />
+                도움말
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <InfoOutlinedIcon fontsize="small" />
+                정보
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={onBackButton}>
+                <SaveOutlinedIcon fontsize="small" />
+                변경사항 저장
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={e => handleLogout()}>
+                <LockOpenOutlinedIcon fontsize="small" />
+                로그아웃
+              </MenuItem>
+            </MenuList>
+          </Paper>
+        </div>
       </div>
     </div>
   );
