@@ -18,7 +18,7 @@ function App() {
       <Route path="/Home" component={Home} />
       <Route path="/Register" component={Register} />
       <Route path="/PetInfo" component={PetInfo} />
-      <Route path="/SearchPage" component={SearchPage} />
+      <Route path="/SearchPage/:category" component={SearchPage} />
       <Route path="/UserPage" component={UserPage} />
       <Route path="/ListPage" component={ListPage} />
       <Route path="/InputPage" component={InputPage} />

@@ -11,14 +11,17 @@ import FoodList from "./FoodList";
 
 
 
-const SearchPage = () => {
+const SearchPage = ({match}) => {
   const [food_data, setFoodData] = useState(null);
   const [search_data, setSearchData] = useState([]);
   const [count, setCount] = useState(0);
+  const { category } = match.params;
+  console.log(category);
 
   //리스트 데이터를 가져오는 부분
   useEffect(() => {
     getFoodList();
+    window.sessionStorage.removeItem(`checkedItem`);
   }, []);
 
   const handleCount = (cnt) => {
@@ -38,14 +41,18 @@ const SearchPage = () => {
     setSearchData(data);
   }
 
+  const handleFoodData = (data) => {
+    setFoodData(data);
+  }
+
   return (
     <div>
-      <Headbar title="입력" count={count}></Headbar>
+      <Headbar title={category} count={count}></Headbar>
       {console.log(count)};
       {food_data !== null ? 
       (<div>
         <Searchbar data={food_data} tag={true} handlesearch={handleSearchData}/>
-        <FoodList data={search_data.length > 0 ? search_data : food_data} count={handleCount} />
+        <FoodList data={search_data.length > 0 ? search_data : food_data} count={handleCount} all={food_data} />
         </div>
       )
        : null}

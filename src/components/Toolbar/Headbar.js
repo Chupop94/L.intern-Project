@@ -94,7 +94,7 @@ const Headbar = ({title, count, badge}) => {
           {
             badge ?
             <Badge color="secondary" badgeContent={count}>
-              <img className="h-8 w-8" src="main/bone.png" alt="..."></img>
+              <img className="h-8 w-8" src="/main/bone.png" alt="..."></img>
           </Badge>
           : null
           }

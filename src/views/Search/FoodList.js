@@ -47,7 +47,7 @@ const btn = [
   }
 ];
 
-const FoodList = ({ data, popup, count }) => {
+const FoodList = ({ data, count, all}) => {
   const classes = useStyle();
   const onPopup = useRef();
   const upPopup = useRef();
@@ -55,7 +55,7 @@ const FoodList = ({ data, popup, count }) => {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) 
       setSelected(oldArr => [
         ...oldArr,
         {
@@ -63,7 +63,6 @@ const FoodList = ({ data, popup, count }) => {
           checked: false
         }
       ]);
-    }
   }, []);
 
   const onPopupClick = index => {
@@ -73,6 +72,7 @@ const FoodList = ({ data, popup, count }) => {
   };
 
   const handleCheckedItem = key => {
+    console.log("키 : ", key);
     var arr = [...selected];
     let checked = !arr[key].checked;
     arr[key].checked = !arr[key].checked;
@@ -81,8 +81,21 @@ const FoodList = ({ data, popup, count }) => {
     count(arr.filter(value => value.checked === true).length);
   };
 
+  const compareTodata = () => {
+    var data = [];
+    const compare = Object.keys(all).map(key => {
+      if(selected[key].checked)
+        data.push(all[key]);
+    });
+    //데이터를 저장한다.
+    window.sessionStorage.setItem(`checkedItem`, JSON.stringify(data));
+    window.location.href="/Compare";
+  }
+
   return (
+   
     <div className="flex justify-around">
+     {console.log(selected)}
       <List>
         {Object.keys(data).map(key => (
           <div className="relatvie z-0 flex items-center justify-around">
@@ -105,16 +118,16 @@ const FoodList = ({ data, popup, count }) => {
               className={classes.checkbox}
               variant={
                 selected.length > 0
-                  ? selected[key].checked
+                  ? selected[data[key].food_no - 1].checked
                     ? "contained"
                     : "outlined"
                   : "outlined"
               }
               color="secondary"
-              onClick={() => handleCheckedItem(key)}
+              onClick={() => handleCheckedItem(data[key].food_no - 1)}
             >
               {selected.length > 0 ? (
-                selected[key].checked ? (
+                selected[data[key].food_no - 1].checked ? (
                   <MdCheck className="w-5 h-5" />
                 ) : (
                   "담기"
@@ -138,7 +151,7 @@ const FoodList = ({ data, popup, count }) => {
         <div className="mbsc-align-center mbsc-padding">
           <div className="mbsc-col text-center mbsc-col">
             {selected.filter(value => value.checked === true).length > 1 ? (
-              <button>비교하기</button>
+              <button onClick={()=> compareTodata()}>비교하기</button>
             ) : (
               <span>
                 추가 선택 필요
