@@ -19,32 +19,32 @@ export default class Home extends PureComponent {
       pet: JSON.parse(window.sessionStorage.getItem("pet")),
       month: date.getMonth() + 1,
       day: date.getDate(),
-      value : [
+      value: [
         {
-          id : 1,
-          name : "개사료",
-          fimg : "/main/fodderex.png",
-          limg : "/main/smile.png"
+          id: 1,
+          name: "개사료",
+          fimg: "/main/fodderex.png",
+          limg: "/main/smile.png",
         },
         {
-          id : 2,
-          name : "고양이 사료",
-          fimg : "/main/fodderex.png",
-          limg : "/main/smile.png"
+          id: 2,
+          name: "고양이 사료",
+          fimg: "/main/fodderex.png",
+          limg: "/main/smile.png",
         },
         {
-          id : 3,
-          name : "물고기 사료",
-          fimg : "/main/fodderex.png",
-          limg : "/main/smile.png"
+          id: 3,
+          name: "물고기 사료",
+          fimg: "/main/fodderex.png",
+          limg: "/main/smile.png",
         },
         {
-          id : 4,
-          name : "킹냥이 사료",
-          fimg : "/main/fodderex.png",
-          limg : "/main/smile.png"
+          id: 4,
+          name: "킹냥이 사료",
+          fimg: "/main/fodderex.png",
+          limg: "/main/smile.png",
         },
-      ]
+      ],
     };
   }
 
@@ -61,7 +61,9 @@ export default class Home extends PureComponent {
               {this.state.month}월 {this.state.day}일
             </span>
             <br />
-            <span className="line-2">{this.state.pet.name}는 <span className="font-hairline">지금,</span></span>
+            <span className="line-2">
+              {this.state.pet.name}는 <span className="font-hairline">지금,</span>
+            </span>
             <br />
             <span className="line-3">
               <b> 소고기 킬러</b>>
@@ -73,7 +75,7 @@ export default class Home extends PureComponent {
         </div>
         <div className="middle-div">
           <button onClick={e => this.onSearchPage(e)}>
-              <img src="/main/Home_Bowl.png" alt="bowl" />
+            <img src="/main/Home_Bowl.png" alt="bowl" />
           </button>
         </div>
         <div className="bottom-div">

@@ -1,0 +1,61 @@
+.first {
+  width: 100vw;
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .root {
+    align-items: center;
+    text-align: center;
+  }
+
+  .topbox {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .boxchange {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .button {
+    display: inline-flex;
+    font-weight: bold;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    background-color: coral;
+    // 사이즈 관리
+    &.large {
+      height: 3rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 1.25rem;
+    }
+
+    &.medium {
+      height: 2.25rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 1rem;
+    }
+
+    &.small {
+      height: 1.7rem;
+      font-size: 0.75rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .clear {
+    color: red;
+    text-align: end;
+  }
+}
