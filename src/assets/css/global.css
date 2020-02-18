@@ -61,7 +61,54 @@
   justify-content: center;
 }
 
-
 .fab:focus {
     outline:none !important;
 }
+
+.tag-slide-item {
+  font-size:9pt;
+  background:#ed8936;
+  color:white;
+  border-radius: 9999px;
+  padding:0.25rem;
+  width:85px;
+}
+
+.tag-list-div {
+  display:flex;
+  justify-content: flex-start;
+  padding-left:40px;
+  margin-top:-30px;
+}
+
+.tag-box {
+  margin-left:7px;
+  position: relative;
+  z-index:100;
+  background:rgb(255,96,52);
+  border-radius: 9999px;
+}
+
+.tag-item {
+  color:white;
+  font-size:10pt;
+  padding-left:0.5rem;
+  padding-right:0.25rem;
+}
+
+.tag-btn {
+  border-radius:50%;
+  font-size:9pt;
+  width:15px;
+  height:15px;
+  background:#edf2f7;
+  color:rgb(255,96,52);
+}
+
+/* FoodList */
+.back_btn {
+  border-radius:9999px;
+  position: relative;
+  z-index:1;
+}
+

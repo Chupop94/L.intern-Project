@@ -12,3 +12,20 @@
     font-size:12px;
     text-align:center;
   }
+
+.btn-wrap {
+  width:49%;
+  position: relative;
+}
+
+.btn-img {
+  width:100%;
+}
+
+.btn-text {
+  position: absolute;
+  width:100%;
+  top:45%;
+  text-align:center;
+  color:white;
+}
