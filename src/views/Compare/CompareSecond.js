@@ -17,6 +17,9 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export default function CompareSecond() {
+  const s_data = JSON.parse(window.sessionStorage.getItem(`standard`));
+  const c_data = JSON.parse(window.sessionStorage.getItem(`compare`));
+
   const [data, setData] = useState([
     {
       id: 1,
@@ -101,7 +104,9 @@ export default function CompareSecond() {
   }
 
   return (
+
     <div className="second">
+
       <Headbar title="제품 비교하기" input={false}></Headbar>
 
       <div className="root">

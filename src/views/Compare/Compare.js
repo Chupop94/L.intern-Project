@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   makeStyles,
   AppBar,
@@ -20,6 +20,8 @@ import {
   ListItemSecondaryAction,
   Button
 } from "@material-ui/core";
+import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
+import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 
 //css
 import "../../assets/sass/Compare/First.scss";
@@ -45,21 +47,24 @@ const defaultProps = {
 };
 
 export default function ComparePage() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(-1);
   const [isActive, setActive] = useState(false);
   const [topBlock, setBlock] = useState(false);
-  const [isCompare, setCompare] = useState(false);
+  const [compare, setCompare] = useState([]);
+  const upPopup = useRef();
   const data = JSON.parse(window.sessionStorage.getItem(`checkedItem`));
 
   // 담기버튼이 나오면서 해당 list의 index 값을 넘김
-  const showListClick = index => {
-    console.log(index);
-    setIndex(index);
+  const showListClick = key => {
+    setIndex(key);
+    setActive(false);
     setBlock(true);
   };
 
   const hideListClick = () => {
     setBlock(false);
+    setIndex(-1);
+    setCompare([]);
   };
 
   // 선택한 List의 값이 나올 예정, 현재 index값만 나옴
@@ -67,18 +72,34 @@ export default function ComparePage() {
     setActive(true);
   };
 
-  const handleHide = () => {
-    setActive(false);
-    setCompare(true);
+  const handleCompareList = key => {
+    var arr = [...compare];
+
+    if (compare.includes(key)) {
+      arr = arr.filter(idx => idx !== key);
+    } else arr.push(key);
+
+    setCompare(arr);
+    upPopup.current.instance.show();
   };
 
-  const onCompareSecond = () => {
+  const routeToCompare = () => {
+    window.sessionStorage.setItem(`standard`, JSON.stringify(data[index]));
+    window.sessionStorage.setItem(`compare`, JSON.stringify(changeData()));
     window.location.href = "/CompareSecond";
-  };
+  }
+
+  const changeData = () => {
+    var arr = [];
+    compare.map(key => {
+      arr.push(data[key]);
+    });
+    return arr;
+  }
 
   return (
     <div className="first">
-      <Headbar title="입력" input={false}></Headbar>
+      <Headbar title="비교함"></Headbar>
 
       {/* // 
         1. 선택을 하지 않았을때 비교하고싶은 사료 등록하고 
@@ -90,26 +111,25 @@ export default function ComparePage() {
           <Box justifyContent="center">
             <Box className="boxchange" borderRadius={16} {...defaultProps}>
               <ListItemAvatar>
-                <Avatar className="avatar" src="main/fodderex.png" alt="..." />
+                <Avatar
+                  className="avatar"
+                  src={"/data/" + data[index].food_no + ".png"}
+                  alt="..."
+                />
               </ListItemAvatar>
               <ListItemText
-                primary={index.data}
+                primary={data[index].food_name}
                 secondary={
-                  <React.Fragment>{"#태그 #태그 #태그"}</React.Fragment>
+                  <React.Fragment>
+                    {data[index].food_category}
+                    <br />
+                    {data[index].food_tag}
+                  </React.Fragment>
                 }
               />
-
-              <Button
-                className="button"
-                size="small"
-                variant="contained"
-                onClick={handleHide}
-              >
-                비교사료 추가
-              </Button>
               <IconButton>
                 <ClearIcon
-                  fontsize="small"
+                  fontSize="small"
                   className="clear"
                   onClick={hideListClick}
                 />
@@ -137,55 +157,67 @@ export default function ComparePage() {
           <Grid>
             <div>
               <List>
-                {Object.keys(data).map(key => {
-                  return (
-                    <ListItem key={data[key].food_no}>
-                      <ListItemAvatar>
-                        <Avatar
-                          className="avatar"
-                          src="main/fodderex.png"
-                          alt="..."
+                {Object.keys(data)
+                  .filter(key => key !== index)
+                  .map(key => {
+                    return (
+                      <ListItem key={data[key].food_no}>
+                        <ListItemAvatar>
+                          <Avatar
+                            className="avatar"
+                            src={"/data/" + data[key].food_no + ".png"}
+                            alt="..."
+                          />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={data[key].food_name}
+                          secondary={
+                            <React.Fragment>
+                              {data[key].food_category}
+                              <br />
+                              {data[key].food_tag}
+                            </React.Fragment>
+                          }
                         />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={data[key].food_name}
-                        secondary={
-                          <React.Fragment>
-                            {data[key].food_category}
-                            <br />
-                            {data[key].food_tag}
-                          </React.Fragment>
-                        }
-                      />
-                      {isActive && (
-                        <ListItemSecondaryAction className="items-start">
-                          <Button
-                            variant="contained"
-                            className="button"
-                            size="medium"
-                            onClick={() => showListClick(1)}
-                          >
-                            담기
-                          </Button>
-                        </ListItemSecondaryAction>
-                      )}
+                        {isActive && (
+                          <ListItemSecondaryAction className="items-start">
+                            <button
+                              className="button-active"
+                              onClick={() => showListClick(key)}
+                            >
+                              <span className="btn_txt">담기</span>
+                            </button>
+                          </ListItemSecondaryAction>
+                        )}
 
-                      {isCompare && (
-                        <ListItemSecondaryAction className="items-start">
-                          <Button
-                            variant="contained"
-                            className="button"
-                            size="medium"
-                            onClick={onCompareSecond}
-                          >
-                            비교
-                          </Button>
-                        </ListItemSecondaryAction>
-                      )}
-                    </ListItem>
-                  );
-                })}
+                        {topBlock && (
+                          <ListItemSecondaryAction className="items-start">
+                            <button
+                              className={
+                                compare.includes(Number.parseInt(key))
+                                  ? "button-disable"
+                                  : "button-active"
+                              }
+                              onClick={() =>
+                                handleCompareList(Number.parseInt(key))
+                              }
+                            >
+                              <span className="btn_txt2">비교</span>
+                              &nbsp;
+                            </button>
+                          </ListItemSecondaryAction>
+                        )}
+                      </ListItem>
+                    );
+                  })}
               </List>
+              <mobiscroll.Popup ref={upPopup} display="bottom" buttons={[]}>
+                <div className="mbsc-align-center">
+                  <div className="mbsc-col text-center mbsc-col">
+                      <button onClick={() => routeToCompare()}>비교하기</button>
+                  </div>
+                </div>
+              </mobiscroll.Popup>
             </div>
           </Grid>
         </Grid>
@@ -193,5 +225,3 @@ export default function ComparePage() {
     </div>
   );
 }
-
-//export default ComparePage;
