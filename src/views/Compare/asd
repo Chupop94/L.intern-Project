@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
-import { makeStyles, Grid, ListItem, Button, ListItemText, Avatar, IconButton, Divider } from "@material-ui/core";
+import { makeStyles, Grid, ListItem, Button, ListItemText, Avatar, Divider } from "@material-ui/core";
 
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import StarIcon from "@material-ui/icons/Star";
+
 
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
@@ -22,10 +24,22 @@ mobiscroll.settings = {
 };
 
 export default function CompareSecond() {
-  const s_data = JSON.parse(window.sessionStorage.getItem(`standard`));
-  const c_data = JSON.parse(window.sessionStorage.getItem(`compare`));
   const onPopup = useRef();
-  const [popNUm, setpopNum] = useState(0);
+
+  const [popNum, setpopNum] = useState(0);
+
+  const [product, setProduct] = useState([
+    {
+      id: 1,
+      data: "Product 1",
+      img: "main/fodderex.png",
+    },
+    {
+      id: 2,
+      data: "Product 2",
+      img: "main/pet-food.png",
+    },
+  ]);
 
   const [data, setData] = useState([
     {
@@ -109,13 +123,17 @@ export default function CompareSecond() {
     );
   }
 
+  const onHome = () => {
+    window.location.href = "/Home";
+  };
+
   const onPopupClick = index => {
     setpopNum(index);
     onPopup.current.instance.show();
   };
 
   return (
-    <div className="second">
+    <div className="compare-second">
       <Headbar title="제품 비교하기" input={false}></Headbar>
 
       <div className="root">
@@ -125,7 +143,7 @@ export default function CompareSecond() {
               <h2>제품</h2>
             </Grid>
 
-            {data.map(value => (
+            {product.map(value => (
               <Grid item xs>
                 <div className="flex justify-around">
                   <Button onClick={() => onPopupClick(value)}>
@@ -143,14 +161,14 @@ export default function CompareSecond() {
             ))}
             <mobiscroll.Popup ref={onPopup} display="center" buttons={null}>
               <div className="mbsc-align-center mbsc-padding">
-                <img src="" alt="..." />
+                <img src={popNum.img} alt="..." />
                 <h3>생략</h3>
                 <p>
                   설명1 <br /> 설명2
                 </p>
-                <IconButton color="secondary">
-                  <FavoriteIcon />
-                </IconButton>
+                <Button variant="contained" color='white' size="small" className={useStyle().button} startIcon={<StarIcon />} onClick={onHome}>
+                  즐겨찾기
+                </Button>
               </div>
             </mobiscroll.Popup>
           </Grid>

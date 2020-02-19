@@ -1,12 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   makeStyles,
-  AppBar,
-  InputBase,
-  Toolbar,
-  Typography,
   IconButton,
-  fade,
   Grid,
   ListItem,
   ListItemAvatar,
@@ -14,11 +9,8 @@ import {
   ListItemText,
   List,
   Box,
-  Badge,
-  Checkbox,
-  FormControlLabel,
   ListItemSecondaryAction,
-  Button
+  Button,
 } from "@material-ui/core";
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
@@ -33,9 +25,9 @@ import ClearIcon from "@material-ui/icons/Clear";
 const useStyle = makeStyles(theme => ({
   ButtonMiddle: {
     width: 200,
-    height: 100,
-    display: "flex"
-  }
+    height: 150,
+    display: "flex",
+  },
 }));
 
 const defaultProps = {
@@ -43,7 +35,7 @@ const defaultProps = {
   borderColor: "text.primary",
   m: 1,
   border: 1,
-  style: { width: "21rem", height: "6rem" }
+  style: { width: "21rem", height: "10rem" },
 };
 
 export default function ComparePage() {
@@ -138,13 +130,7 @@ export default function ComparePage() {
           </Box>
         ) : (
           <Box display="flex" justifyContent="center">
-            <Box
-              component="button"
-              className="topbox"
-              borderRadius={16}
-              {...defaultProps}
-              onClick={handleShow}
-            >
+            <Box component="button" className="topbox" borderRadius={16} {...defaultProps} onClick={handleShow}>
               <ControlPointIcon />
               <h6>비교하고 싶은 사료를 등록하세요.</h6>
             </Box>

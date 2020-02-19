@@ -10,6 +10,7 @@ import ListPage from "./views/ListPage/ListPage";
 import InputPage from "./views/Search/InputPage";
 import Compare from "./views/Compare/Compare";
 import CompareSecond from "./views/Compare/CompareSecond";
+import CameraPage from "../src/components/Camera/Camera";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/InputPage" component={InputPage} />
       <Route path="/Compare" component={Compare} />
       <Route path="/CompareSecond" component={CompareSecond} />
+      <Route path="/CameraPage" component={CameraPage} />
       {window.sessionStorage.getItem("pet") != null ? <div className="div-tab-block"></div> : null}
     </div>
   );

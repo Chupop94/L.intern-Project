@@ -1,13 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  Button,
-  makeStyles
-} from "@material-ui/core";
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button, makeStyles } from "@material-ui/core";
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 import { MdCheck } from "react-icons/md";
@@ -15,7 +7,7 @@ import { MdCheck } from "react-icons/md";
 
 mobiscroll.settings = {
   theme: "ios",
-  themeVariant: "light"
+  themeVariant: "light",
 };
 
 const useStyle = makeStyles(theme => ({
@@ -23,8 +15,8 @@ const useStyle = makeStyles(theme => ({
     position: "relative",
     borderRadius: "9999px",
     width: "30px",
-    height: "40px"
-  }
+    height: "40px",
+  },
 }));
 
 const btn = [
@@ -33,19 +25,19 @@ const btn = [
     handler: function(event, inst) {
       inst.hide();
       mobiscroll.toast({
-        message: "취소 선택"
+        message: "취소 선택",
       });
-    }
+    },
   },
   {
     text: "확인",
     handler: function(event, inst) {
       inst.hide();
       mobiscroll.toast({
-        message: "확인 선택"
+        message: "확인 선택",
       });
-    }
-  }
+    },
+  },
 ];
 
 const btn2 = [
@@ -59,13 +51,13 @@ const FoodList = ({ data, count, all, compare}) => {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    for (let i = 0; i < data.length; i++) 
+    for (let i = 0; i < data.length; i++)
       setSelected(oldArr => [
         ...oldArr,
         {
           id: data[i].food_no,
-          checked: false
-        }
+          checked: false,
+        },
       ]);
   }, []);
 
@@ -106,9 +98,8 @@ const FoodList = ({ data, count, all, compare}) => {
   }
 
   return (
-   
     <div className="flex justify-around">
-     {console.log(selected)}
+      {console.log(selected)}
       <List>
         {Object.keys(data).map(key => (
           <div className="relatvie z-0 flex items-center justify-around">
@@ -129,23 +120,11 @@ const FoodList = ({ data, count, all, compare}) => {
             </ListItem>
             <Button
               className={classes.checkbox}
-              variant={
-                selected.length > 0
-                  ? selected[data[key].food_no - 1].checked
-                    ? "contained"
-                    : "outlined"
-                  : "outlined"
-              }
+              variant={selected.length > 0 ? (selected[data[key].food_no - 1].checked ? "contained" : "outlined") : "outlined"}
               color="secondary"
               onClick={() => handleCheckedItem(data[key].food_no - 1)}
             >
-              {selected.length > 0 ? (
-                selected[data[key].food_no - 1].checked ? (
-                  <MdCheck className="w-5 h-5" />
-                ) : (
-                  "담기"
-                )
-              ) : null}
+              {selected.length > 0 ? selected[data[key].food_no - 1].checked ? <MdCheck className="w-5 h-5" /> : "담기" : null}
             </Button>
           </div>
         ))}

@@ -10,22 +10,22 @@ const ListPage = () => {
   const pet = JSON.parse(window.sessionStorage.getItem("pet"));
   console.log(pet.name);
 
-  const onInputPage = () => {
-    window.location.href ="./InputPage";
-  }
+  // const onInputPage = () => {
+  //   window.location.href = "./InputPage";
+  // };
 
   return (
     <div className="w-screen">
-    <div className="pt-3">
+      {/* <div className="pt-3">
       <Headbar input={false} title="그릇 추가하기"/>
-    </div>
+    </div> */}
       <p />
       <SelectTodayList name={pet.name}></SelectTodayList>
-      <div className="text-center pt-4">
+      {/* <div className="text-center pt-4">
         <button className="rounded-button" onClick={onInputPage}>
           <b>새로 담기</b>
         </button>
-      </div>
+      </div> */}
       <div className="pt-5">
         <EatenPage pet={pet}></EatenPage>
       </div>
