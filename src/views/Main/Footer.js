@@ -15,7 +15,7 @@ export default class Footer extends PureComponent {
         window.location.href = "/Home";
         break;
       case 2:
-        window.location.href = "/SearchPage";
+        window.location.href = "/InputPage";
         break;
       case 3:
         window.location.href = "/";

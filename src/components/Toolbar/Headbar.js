@@ -55,13 +55,22 @@ const useStyle = makeStyles(theme => ({
 title : Head Toolbar의 이름
 count : 뼈다귀 badge 수정 개수
 */
-const Headbar = ({title, count, badge}) => {
+const Headbar = ({title, count, badge, compare}) => {
 
   if (count === undefined) {
       count = 0;
   }
   if (badge === undefined) {
     badge = true;
+  }
+
+  const compareTodata = () => {
+      if(compare === null) {
+        alert("비교대상 아이템이 없습니다!");
+        return;
+      }
+    window.sessionStorage.setItem(`checkedItem`, JSON.stringify(compare));
+    window.location.href="/Compare";
   }
 
   const classes = useStyle();
@@ -94,7 +103,7 @@ const Headbar = ({title, count, badge}) => {
           {
             badge ?
             <Badge color="secondary" badgeContent={count}>
-              <img className="h-8 w-8" src="/main/bone.png" alt="..."></img>
+              <img className="h-8 w-8" src="/main/bone.png" alt="..." onClick={() => compareTodata()}></img>
           </Badge>
           : null
           }

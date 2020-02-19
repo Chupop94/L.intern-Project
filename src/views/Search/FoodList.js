@@ -12,6 +12,7 @@ import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 import { MdCheck } from "react-icons/md";
 
+
 mobiscroll.settings = {
   theme: "ios",
   themeVariant: "light"
@@ -47,7 +48,10 @@ const btn = [
   }
 ];
 
-const FoodList = ({ data, count, all}) => {
+const btn2 = [
+];
+
+const FoodList = ({ data, count, all, compare}) => {
   const classes = useStyle();
   const onPopup = useRef();
   const upPopup = useRef();
@@ -79,16 +83,25 @@ const FoodList = ({ data, count, all}) => {
     setSelected(arr);
     if (checked === true) upPopup.current.instance.show();
     count(arr.filter(value => value.checked === true).length);
+    compare(compareTodata(arr));
   };
 
-  const compareTodata = () => {
-    var data = [];
-    const compare = Object.keys(all).map(key => {
-      if(selected[key].checked)
-        data.push(all[key]);
+  const compareTodata = (arr) => {
+    var c_arr = arr;
+    var c_data = [];
+    if(c_arr === undefined)
+      c_arr = selected;
+
+    Object.keys(all).map(key => {
+      if(c_arr[key].checked)
+        c_data.push(all[key]);
     });
-    //데이터를 저장한다.
-    window.sessionStorage.setItem(`checkedItem`, JSON.stringify(data));
+    return c_data;
+  }
+  
+  const routeToCompare = () => {
+    var c_data = compareTodata();
+    window.sessionStorage.setItem(`checkedItem`, JSON.stringify(c_data));
     window.location.href="/Compare";
   }
 
@@ -101,7 +114,7 @@ const FoodList = ({ data, count, all}) => {
           <div className="relatvie z-0 flex items-center justify-around">
             <ListItem key={data[key].food_no} onClick={() => onPopupClick(key)}>
               <ListItemAvatar>
-                <Avatar src="main/fodderex.png" alt="..." />
+                <Avatar src={"/data/" + data[key].food_no + ".png"} alt="..." />
               </ListItemAvatar>
               <ListItemText
                 primary={data[key].food_name}
@@ -147,11 +160,11 @@ const FoodList = ({ data, count, all}) => {
         </div>
       </mobiscroll.Popup>
 
-      <mobiscroll.Popup ref={upPopup} display="bottom" buttons={btn}>
-        <div className="mbsc-align-center mbsc-padding">
+      <mobiscroll.Popup ref={upPopup} display="bottom" buttons={btn2} >
+        <div className="mbsc-align-center w-screen bg-yellow-200">
           <div className="mbsc-col text-center mbsc-col">
             {selected.filter(value => value.checked === true).length > 1 ? (
-              <button onClick={()=> compareTodata()}>비교하기</button>
+              <button onClick={()=> routeToCompare()}>비교하기</button>
             ) : (
               <span>
                 추가 선택 필요

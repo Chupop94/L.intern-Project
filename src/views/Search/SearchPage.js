@@ -14,6 +14,7 @@ import FoodList from "./FoodList";
 const SearchPage = ({match}) => {
   const [food_data, setFoodData] = useState(null);
   const [search_data, setSearchData] = useState([]);
+  const [compare_data, setCompareData] = useState(null);
   const [count, setCount] = useState(0);
   const { category } = match.params;
   console.log(category);
@@ -41,18 +42,14 @@ const SearchPage = ({match}) => {
     setSearchData(data);
   }
 
-  const handleFoodData = (data) => {
-    setFoodData(data);
-  }
-
   return (
     <div>
-      <Headbar title={category} count={count}></Headbar>
-      {console.log(count)};
+      <Headbar title={category} count={count} compare={compare_data}></Headbar>
+      {console.log(count)}
       {food_data !== null ? 
       (<div>
         <Searchbar data={food_data} tag={true} handlesearch={handleSearchData}/>
-        <FoodList data={search_data.length > 0 ? search_data : food_data} count={handleCount} all={food_data} />
+        <FoodList data={search_data.length > 0 ? search_data : food_data} count={handleCount} all={food_data} compare={setCompareData} />
         </div>
       )
        : null}
