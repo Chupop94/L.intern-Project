@@ -9,9 +9,7 @@ import Headbar from "../../components/Toolbar/Headbar.js";
 import Searchbar from "../../components/Toolbar/Searchbar.js";
 import FoodList from "./FoodList";
 
-
-
-const SearchPage = ({match}) => {
+const SearchPage = ({ match }) => {
   const [food_data, setFoodData] = useState(null);
   const [search_data, setSearchData] = useState([]);
   const [compare_data, setCompareData] = useState(null);
@@ -25,10 +23,10 @@ const SearchPage = ({match}) => {
     window.sessionStorage.removeItem(`checkedItem`);
   }, []);
 
-  const handleCount = (cnt) => {
+  const handleCount = cnt => {
     setCount(cnt);
     console.log(cnt);
-  }
+  };
 
   const getFoodList = () => {
     var http = new HttpConnect();
@@ -38,9 +36,9 @@ const SearchPage = ({match}) => {
     });
   };
 
-  const handleSearchData = (data) => {
+  const handleSearchData = data => {
     setSearchData(data);
-  }
+  };
 
   return (
     <div>
@@ -51,8 +49,7 @@ const SearchPage = ({match}) => {
         <Searchbar data={food_data} tag={true} handlesearch={handleSearchData}/>
         <FoodList data={search_data.length > 0 ? search_data : food_data} count={handleCount} all={food_data} compare={setCompareData} />
         </div>
-      )
-       : null}
+      ) : null}
     </div>
   );
 };

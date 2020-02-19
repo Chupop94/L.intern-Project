@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import Redirect from "../../security/Redirect";
+import ListPage from "../ListPage/ListPage";
 
 // css import
 import "../../assets/sass/Main/home.scss";
@@ -49,7 +50,7 @@ export default class Home extends PureComponent {
   }
 
   onSearchPage = e => {
-    window.location.href = "/ListPage";
+    window.location.href = "/InputPage";
   };
 
   render() {
@@ -79,7 +80,8 @@ export default class Home extends PureComponent {
           </button>
         </div>
         <div className="bottom-div">
-          <HomeList value={this.state.value}></HomeList>
+          {/* <HomeList value={this.state.value}></HomeList> */}
+          <ListPage />
         </div>
       </div>
     );
