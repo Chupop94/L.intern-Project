@@ -22,6 +22,7 @@ import Headbar from "../../components/Toolbar/Headbar.js";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import ClearIcon from "@material-ui/icons/Clear";
 //
+
 const useStyle = makeStyles(theme => ({
   ButtonMiddle: {
     width: 200,
@@ -91,7 +92,7 @@ export default function ComparePage() {
 
   return (
     <div className="first">
-      <Headbar title="비교함"></Headbar>
+      <Headbar title="비교함" badge={false}></Headbar>
 
       {/* // 
         1. 선택을 하지 않았을때 비교하고싶은 사료 등록하고 

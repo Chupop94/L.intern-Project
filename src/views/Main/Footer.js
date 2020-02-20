@@ -46,7 +46,7 @@ export default class Footer extends PureComponent {
             </ul>
           </IconButton>
           <IconButton className="tab-item" onClick={e => this.handleMovePage(2)}>
-            <ul className={this.getCheckPage("/Search") ? "orange-color" : null}>
+            <ul className={(this.getCheckPage("/Input") || this.getCheckPage("/Search")) ? "orange-color" : null}>
               <li>
                 <GoSearch />
               </li>

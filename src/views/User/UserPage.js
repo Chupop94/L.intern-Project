@@ -4,6 +4,7 @@ import { makeStyles, Divider, Avatar, MenuItem, MenuList, Paper } from "@materia
 //css
 import Headbar from "../../components/Toolbar/Headbar.js";
 import "../../assets/sass/UserPage/user.scss";
+import { options } from "../../data/PetSpecices";
 
 import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import CategoryOutlinedIcon from "@material-ui/icons/CategoryOutlined";
@@ -73,7 +74,7 @@ const UserPage = () => {
   return (
     <div>
       <div className="pt-3">
-        <Headbar input={false} title="마이페이지" />
+        <Headbar badge={false} title="마이페이지" />
       </div>
 
       <div className="flex justify-center">
@@ -85,9 +86,11 @@ const UserPage = () => {
           {pet.name}
           <FavoriteIcon color="secondary" />
           <br />
-          <small>나이 : {pet.age}쨜</small>
+          <small>나이 : {pet.age}</small>
           <br />
-          <small>종 : </small>
+          <small>종 : {options.filter((value) => 
+            value.value === pet.speciesNo
+          )[0].label}</small>
         </h4>
       </div>
 
@@ -101,17 +104,17 @@ const UserPage = () => {
             </MenuItem>
             <Divider />
             <MenuItem>
-              <CategoryOutlinedIcon fontsize="small" />
+              <CategoryOutlinedIcon fontSize="small" />
               &nbsp; 광고
             </MenuItem>
             <Divider />
             <MenuItem>
-              <HelpOutlineOutlinedIcon fontsize="small" />
+              <HelpOutlineOutlinedIcon fontSize="small" />
               &nbsp; 도움말
             </MenuItem>
             <Divider />
             <MenuItem>
-              <InfoOutlinedIcon fontsize="small" />
+              <InfoOutlinedIcon fontSize="small" />
               &nbsp; 정보
             </MenuItem>
             <Divider />
@@ -121,7 +124,7 @@ const UserPage = () => {
             </MenuItem>
             <Divider />
             <MenuItem onClick={e => handleLogout()}>
-              <LockOpenOutlinedIcon fontsize="small" />
+              <LockOpenOutlinedIcon fontSize="small" />
               &nbsp; 로그아웃
             </MenuItem>
           </MenuList>

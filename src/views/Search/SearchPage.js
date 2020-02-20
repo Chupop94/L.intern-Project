@@ -17,6 +17,12 @@ const SearchPage = ({ match }) => {
   const { category } = match.params;
   console.log(category);
 
+  window.onpageshow = function(event) {
+    if (event.persisted) {
+        document.location.reload();
+    }
+}
+//1
   //리스트 데이터를 가져오는 부분
   useEffect(() => {
     getFoodList();

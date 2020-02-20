@@ -96,14 +96,14 @@ const Searchbar = ({ tag, data, handlesearch }) => {
   //이중 검색 필터
   //들어가지 않은 데이터만 들어갈 수 있게 확인
   const searchFilter = (result) => {
-    for (let i = 0; i < result.length; i++) {
-      for (let j = i + 1; j < result.length; j++) {
-        if (result[i].food_no === result[j].food_no) {
-          result.splice(i, 1);
-        }
+    var arr = [];
+    Object.keys(result).map(key => {
+      if(arr.indexOf(result[key]) === -1) {
+        arr.push(result[key]);
       }
-    }
-    handlesearch(result);
+    });
+
+    handlesearch(arr);
   };
 
   //텍스트를 검색창으로 변경시키고, tag를 제거하는 방식을 적용

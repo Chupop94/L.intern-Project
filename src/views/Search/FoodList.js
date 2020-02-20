@@ -129,7 +129,7 @@ const FoodList = ({ data, count, all, compare}) => {
           </div>
         ))}
       </List>
-      <mobiscroll.Popup ref={onPopup} display="center" buttons={null}>
+      <mobiscroll.Popup ref={onPopup} display="center">
         <div className="mbsc-align-center mbsc-padding">
           <img src="main/fodderex.png" alt="..." />
           <h3>생략</h3>
