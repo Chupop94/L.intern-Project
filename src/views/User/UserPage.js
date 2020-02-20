@@ -78,7 +78,7 @@ const UserPage = () => {
       </div>
 
       <div className="flex justify-center">
-        <Avatar src={pet.petImg} alt="..." className={useStyles().large} />
+        <Avatar src={pet.pet_img} alt="..." className={useStyles().large} />
       </div>
       <div className="text-center">
         <h4 className="title">
@@ -86,7 +86,7 @@ const UserPage = () => {
           {pet.name}
           <FavoriteIcon color="secondary" />
           <br />
-          <small>나이 : {pet.age}</small>
+          <small>나이 : {pet.age}살</small>
           <br />
           <small>종 : {options.filter((value) => 
             value.value === pet.speciesNo
