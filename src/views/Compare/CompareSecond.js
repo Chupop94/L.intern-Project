@@ -1,25 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  withStyles,
-  makeStyles,
-  Paper,
-  Grid,
-  TableBody,
-  ListItem,
-  TableCell,
-  TableRow,
-  Button,
-  TableHead,
-  Table,
-  ListItemText,
-  Avatar,
-  IconButton,
-  Box,
-  Typography,
-} from "@material-ui/core";
-import ToggleButton from "@material-ui/lab/ToggleButton";
+import { withStyles, makeStyles, TableBody, TableCell, TableRow, Button, TableHead, Table, Avatar } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
@@ -70,6 +53,7 @@ export default function CompareSecond() {
   const s_data = JSON.parse(window.sessionStorage.getItem(`standard`));
   const c_data = JSON.parse(window.sessionStorage.getItem(`compare`));
   const onPopup = useRef();
+  const onPopup2 = useRef();
   const [popNUm, setpopNum] = useState(0);
   const [current_data, setCurrentData] = useState(c_data[0]);
   const classes = useStyle();
@@ -77,6 +61,11 @@ export default function CompareSecond() {
   const onPopupClick = index => {
     setpopNum(index);
     onPopup.current.instance.show();
+  };
+
+  const onPopup2Click = index => {
+    setpopNum(index);
+    onPopup2.current.instance.show();
   };
 
   //방향을 통해 다음 이미지로 수정
@@ -127,9 +116,7 @@ export default function CompareSecond() {
           <TableRow>
             <TableCell component="th" className={classes.tablecell}></TableCell>
             <TableCell component="th" align="center" className={classes.tablecell}>
-              <Button onClick={() => onPopupClick(s_data.food_no)}>
-                <Avatar src={"/data/" + s_data.food_no + ".png"} className={classes.avatar} />
-              </Button>
+              <Avatar src={"/data/" + s_data.food_no + ".png"} className={classes.avatar} onClick={() => onPopupClick(s_data.food_no)} />
 
               <br />
               <span className="txt-sub">{s_data.distributor}</span>
@@ -138,21 +125,17 @@ export default function CompareSecond() {
                 {s_data.food_name}
                 <br />
               </div>
-              <Button>
-                <StyledRating
-                  name="customized-color"
-                  defaultValue={0}
-                  // getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
-                  precision={1}
-                  icon={<FavoriteIcon fontSize="inherit" />}
-                  max={1}
-                />
-              </Button>
             </TableCell>
             <TableCell component="th" align="center" className={classes.tablecell}>
               <div className="flex items-center justify-between">
                 <IoIosArrowBack onClick={() => indexControl(-1)} />
-                <Avatar src={"/data/" + current_data.food_no + ".png"} className={classes.avatar2} />
+
+                <Avatar
+                  src={"/data/" + current_data.food_no + ".png"}
+                  className={classes.avatar2}
+                  onClick={() => onPopup2Click(current_data.food_no)}
+                />
+
                 <IoIosArrowForward onClick={() => indexControl(1)} />
               </div>
               <br />
@@ -162,16 +145,6 @@ export default function CompareSecond() {
                 {current_data.food_name}
                 <br />
               </div>
-              <Button>
-                <StyledRating
-                  name="customized-color"
-                  defaultValue={0}
-                  getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
-                  precision={1}
-                  icon={<FavoriteIcon fontSize="inherit" />}
-                  max={1}
-                />
-              </Button>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -313,12 +286,50 @@ export default function CompareSecond() {
         </TableBody>
       </Table>
       <mobiscroll.Popup ref={onPopup} display="center" buttons={null}>
+        <div className="flex justify-center">
+          <Avatar src={"/data/" + s_data.food_no + ".png"} alt="..." className={useStyle().large} />
+        </div>
         <div className="mbsc-align-center mbsc-padding">
-          <img src="" alt="..." />
-          <h3>생략</h3>
+          <pre>{s_data.food_name}</pre>
           <p>
-            설명1 <br /> 설명2
+            회사: {s_data.distributor} <br />
+            대상: {s_data.food_category}
           </p>
+          <br />
+          <Button>
+            <StyledRating
+              name="customized-color"
+              defaultValue={0}
+              getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
+              precision={1}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              max={1}
+            />
+          </Button>
+        </div>
+      </mobiscroll.Popup>
+
+      <mobiscroll.Popup ref={onPopup2} display="center" buttons={null}>
+        <div className="flex justify-center">
+          <Avatar src={"/data/" + current_data.food_no + ".png"} alt="..." className={useStyle().large} />
+        </div>
+        <div className="mbsc-align-center mbsc-padding">
+          <pre>{current_data.food_name}</pre>
+          <p>
+            회사: {current_data.distributor} <br />
+            대상: {current_data.food_category}
+          </p>
+          <br />
+          <Button>
+            <StyledRating
+              name="customized-color"
+              defaultValue={0}
+              getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
+              precision={1}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              max={1}
+            />
+          </Button>
         </div>
       </mobiscroll.Popup>
     </div>
