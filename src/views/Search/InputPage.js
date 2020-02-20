@@ -3,6 +3,12 @@ import Headbar from "../../components/Toolbar/Headbar";
 import InputCategory from "../../components/List/InputCategory";
 import "../../assets/sass/Search/InputPage.scss";
 
+window.onpageshow = function(event) {
+  if (event.persisted) {
+      document.location.reload();
+  }
+}
+
 const InputPage = () => {
   //   const saryo_data = [
   //     {

@@ -1,6 +1,5 @@
 .second {
   width: 100vw;
-
   .margintop {
     margin-top: 30px;
   }
@@ -14,4 +13,19 @@
     align-items: center;
     text-align: center;
   }
+}
+
+.txt-main {
+  font-size:10pt;
+}
+
+.txt-sub {
+  font-size:8pt;
+}
+
+.txt_line {
+  width:33.3vw;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }

@@ -55,7 +55,7 @@ const useStyle = makeStyles(theme => ({
 title : Head Toolbar의 이름
 count : 뼈다귀 badge 수정 개수
 */
-const Headbar = ({title, count, badge, compare}) => {
+const Headbar = ({title, count, badge, compare, back}) => {
 
   if (count === undefined) {
       count = 0;
@@ -63,10 +63,13 @@ const Headbar = ({title, count, badge, compare}) => {
   if (badge === undefined) {
     badge = true;
   }
+  if (back === undefined) {
+    back = true;
+  }
 
   const compareTodata = () => {
-      if(compare === null) {
-        alert("비교대상 아이템이 없습니다!");
+      if(compare === null || compare.length === 1) {
+        alert("비교대상 아이템이 부족합니다.");
         return;
       }
     window.sessionStorage.setItem(`checkedItem`, JSON.stringify(compare));
@@ -75,17 +78,17 @@ const Headbar = ({title, count, badge, compare}) => {
 
   const classes = useStyle();
   const onBackButton = () => {
-    window.history.back();
+    window.history.back(-1);
   };
 
   return (
       <div className="toolbar">
-      {console.log(count)}
+      {console.log(compare)}
     <ThemeProvider theme={theme}>
       <AppBar color="inherit" position="static" className={classes.app_bar}>
         <Toolbar variant="dense">
         {
-          badge ?
+          back ?
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -98,7 +101,7 @@ const Headbar = ({title, count, badge, compare}) => {
         }
 
           <Typography className={classes.title} variant="h6">
-            <b className={badge ? "mr-4" : ""}>{title}</b>
+            <b className={(badge && back) ? "mr-4" : ((back && !badge) ? "mr-12" : "" ) }>{title}</b>
           </Typography>
           {
             badge ?
