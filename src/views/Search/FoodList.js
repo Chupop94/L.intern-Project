@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Button, makeStyles, withStyles } from "@material-ui/core";
 import mobiscroll from "../../lib/mobiscroll/js/mobiscroll.react.min.js";
 import "../../lib/mobiscroll/css/mobiscroll.react.min.css";
 import { MdCheck } from "react-icons/md";
-
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import Rating from "@material-ui/lab/Rating";
 
 mobiscroll.settings = {
   theme: "ios",
@@ -47,7 +48,7 @@ const FoodList = ({ data, count, all, compare}) => {
   const classes = useStyle();
   const onPopup = useRef();
   const upPopup = useRef();
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(-1);
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
@@ -97,6 +98,15 @@ const FoodList = ({ data, count, all, compare}) => {
     window.location.href="/Compare";
   }
 
+  const StyledRating = withStyles({
+    iconFilled: {
+      color: "#ff6d75",
+    },
+    iconHover: {
+      color: "#ff3d47",
+    },
+  })(Rating);
+
   return (
     <div className="flex justify-around">
       {console.log(selected)}
@@ -130,13 +140,23 @@ const FoodList = ({ data, count, all, compare}) => {
         ))}
       </List>
       <mobiscroll.Popup ref={onPopup} display="center">
+      {index !== -1 ?
         <div className="mbsc-align-center mbsc-padding">
-          <img src="main/fodderex.png" alt="..." />
-          <h3>생략</h3>
-          <p>
-            설명1 <br /> 설명2
-          </p>
+        <div className="flex justify-center pb-4">
+          <img src={"/data/" + data[index].food_no + ".png"} alt="..." />
         </div>
+          <div className="text-xs text-gray-500">{data[index].distributor}</div><br/>
+          <div className="text-sm">{data[index].food_name}</div><br/>
+          <StyledRating
+                  name="customized-color"
+                  defaultValue={0}
+                  // getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
+                  precision={1}
+                  icon={<FavoriteIcon fontSize="inherit" />}
+                  max={1}
+                />
+        </div>
+        : null }
       </mobiscroll.Popup>
 
       <mobiscroll.Popup ref={upPopup} display="bottom" buttons={btn2} >
