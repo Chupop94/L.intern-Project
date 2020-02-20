@@ -80,7 +80,7 @@ export default function ComparePage() {
     window.sessionStorage.setItem(`standard`, JSON.stringify(data[index]));
     window.sessionStorage.setItem(`compare`, JSON.stringify(changeData()));
     window.location.href = "/CompareSecond";
-  }
+  };
 
   const changeData = () => {
     var arr = [];
@@ -88,7 +88,7 @@ export default function ComparePage() {
       arr.push(data[key]);
     });
     return arr;
-  }
+  };
 
   return (
     <div className="first">
@@ -104,11 +104,7 @@ export default function ComparePage() {
           <Box justifyContent="center">
             <Box className="boxchange" borderRadius={16} {...defaultProps}>
               <ListItemAvatar>
-                <Avatar
-                  className="avatar"
-                  src={"/data/" + data[index].food_no + ".png"}
-                  alt="..."
-                />
+                <Avatar className="avatar" src={"/data/" + data[index].food_no + ".png"} alt="..." />
               </ListItemAvatar>
               <ListItemText
                 primary={data[index].food_name}
@@ -121,11 +117,7 @@ export default function ComparePage() {
                 }
               />
               <IconButton>
-                <ClearIcon
-                  fontSize="small"
-                  className="clear"
-                  onClick={hideListClick}
-                />
+                <ClearIcon fontSize="small" className="clear" onClick={hideListClick} />
               </IconButton>
             </Box>
           </Box>
@@ -150,11 +142,7 @@ export default function ComparePage() {
                     return (
                       <ListItem key={data[key].food_no}>
                         <ListItemAvatar>
-                          <Avatar
-                            className="avatar"
-                            src={"/data/" + data[key].food_no + ".png"}
-                            alt="..."
-                          />
+                          <Avatar className="avatar" src={"/data/" + data[key].food_no + ".png"} alt="..." />
                         </ListItemAvatar>
                         <ListItemText
                           primary={data[key].food_name}
@@ -168,10 +156,7 @@ export default function ComparePage() {
                         />
                         {isActive && (
                           <ListItemSecondaryAction className="items-start">
-                            <button
-                              className="button-active"
-                              onClick={() => showListClick(key)}
-                            >
+                            <button className="button-active" onClick={() => showListClick(key)}>
                               <span className="btn_txt">담기</span>
                             </button>
                           </ListItemSecondaryAction>
@@ -180,14 +165,8 @@ export default function ComparePage() {
                         {topBlock && (
                           <ListItemSecondaryAction className="items-start">
                             <button
-                              className={
-                                compare.includes(Number.parseInt(key))
-                                  ? "button-disable"
-                                  : "button-active"
-                              }
-                              onClick={() =>
-                                handleCompareList(Number.parseInt(key))
-                              }
+                              className={compare.includes(Number.parseInt(key)) ? "button-disable" : "button-active"}
+                              onClick={() => handleCompareList(Number.parseInt(key))}
                             >
                               <span className="btn_txt2">비교</span>
                               &nbsp;
@@ -201,7 +180,7 @@ export default function ComparePage() {
               <mobiscroll.Popup ref={upPopup} display="bottom" buttons={[]}>
                 <div className="mbsc-align-center">
                   <div className="mbsc-col text-center mbsc-col">
-                      <button onClick={() => routeToCompare()}>비교하기</button>
+                    <button onClick={() => routeToCompare()}>비교하기</button>
                   </div>
                 </div>
               </mobiscroll.Popup>
