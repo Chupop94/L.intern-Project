@@ -78,7 +78,7 @@ const UserPage = () => {
       </div>
 
       <div className="flex justify-center">
-        <Avatar src={pet.pet_img} alt="..." className={useStyles().large} />
+        <Avatar src={pet.petImg} alt="..." className={useStyles().large} />
       </div>
       <div className="text-center">
         <h4 className="title">

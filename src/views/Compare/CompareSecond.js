@@ -120,7 +120,6 @@ export default function CompareSecond() {
 
               <br />
               <span className="txt-sub">{s_data.distributor}</span>
-              <br />
               <div className="txt_line">
                 {s_data.food_name}
                 <br />
@@ -296,16 +295,14 @@ export default function CompareSecond() {
             대상: {s_data.food_category}
           </p>
           <br />
-          <Button>
             <StyledRating
               name="customized-color"
               defaultValue={0}
-              getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
+              //getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
               precision={1}
               icon={<FavoriteIcon fontSize="inherit" />}
               max={1}
             />
-          </Button>
         </div>
       </mobiscroll.Popup>
 
@@ -320,16 +317,14 @@ export default function CompareSecond() {
             대상: {current_data.food_category}
           </p>
           <br />
-          <Button>
             <StyledRating
               name="customized-color"
               defaultValue={0}
-              getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
+              //getLabelText={value => `${value} Heart${value !== 1 ? "s" : ""}`}
               precision={1}
               icon={<FavoriteIcon fontSize="inherit" />}
               max={1}
             />
-          </Button>
         </div>
       </mobiscroll.Popup>
     </div>
