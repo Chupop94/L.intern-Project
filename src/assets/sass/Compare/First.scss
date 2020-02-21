@@ -1,0 +1,63 @@
+.first {
+  width: 100vw;
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .root {
+    align-items: center;
+    text-align: center;
+  }
+
+  .topbox {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .boxchange {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .button-active {
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    background-color: coral;
+    width:60px;
+    height:30px;
+  }
+
+  .button-disable {
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    background-color: grey;
+    width:60px;
+    height:30px;
+  }
+
+  .clear {
+    color: red;
+    text-align: end;
+  }
+
+  .btn_txt {
+    position: absolute;
+    margin-top:-12px;
+    margin-left:-18px;
+    font-size:13pt;
+  }
+
+  .btn_txt2 {
+    position: absolute;
+    margin-top:-3px;
+    margin-left:-15px;
+    font-size:13pt;
+  }
+}

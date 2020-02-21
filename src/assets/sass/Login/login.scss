@@ -1,0 +1,41 @@
+.star {
+    color:red;
+}
+
+.scroll_fix {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden !important;
+    touch-action: none;
+    background:linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.6955824566154587) 0%, rgba(0,212,255,1) 100%);
+    color:white;
+}
+
+.login_img {
+    display:flex;
+    justify-content: center;
+    text-align:center;
+}
+
+.login_font {
+    font-size:40px;
+    font-weight:20px;
+}
+
+.login-form {
+    position:relative;
+    width:90vw;
+    left:5vw;
+}
+
+.icons {
+    width:45px;
+    height:45px;
+}
+
+.button-list {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+}

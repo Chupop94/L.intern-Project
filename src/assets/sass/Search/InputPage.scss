@@ -1,0 +1,31 @@
+.category-div {
+    padding-top: 10px;
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow:wrap;
+  }
+  
+  .category-box {
+    width: 95vw*0.25;
+    font-size:12px;
+    text-align:center;
+  }
+
+.btn-wrap {
+  width:49%;
+  position: relative;
+}
+
+.btn-img {
+  width:100%;
+}
+
+.btn-text {
+  position: absolute;
+  width:100%;
+  top:45%;
+  text-align:center;
+  color:white;
+}
