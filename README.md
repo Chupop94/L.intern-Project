@@ -1,4 +1,4 @@
-# L_intern-Project
+# L_intern-Project( Branch : sangwon 으로 다운로드)
 
 @강아지 입맛을 분석하여 사료와 간식을 추천하는 서비스@
 
